@@ -1,6 +1,6 @@
 import type { MonthlyCosts } from "../types";
 
-export interface CostField {
+interface CostField {
 	readonly key: keyof MonthlyCosts;
 	readonly label: string;
 	readonly hint: string;
