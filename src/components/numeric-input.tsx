@@ -22,7 +22,17 @@ export function NumericInput({
 	return (
 		<label htmlFor={inputId}>
 			{label}
-			<input id={inputId} max={max} min={min} onChange={onChange} step={step} type="number" value={value} />
+			<input
+				autoComplete="off"
+				id={inputId}
+				max={max}
+				min={min}
+				name={inputId}
+				onChange={onChange}
+				step={step}
+				type="number"
+				value={value}
+			/>
 		</label>
 	);
 }

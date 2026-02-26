@@ -13,21 +13,19 @@ export function ProfileTabs({
 	onSingleTabClick,
 }: ProfileTabsProperties): React.ReactNode {
 	return (
-		<div aria-label="Profile tabs" className="tabs" role="tablist">
+		<div className="tabs">
 			<button
-				aria-selected={activeTab === "single"}
+				aria-pressed={activeTab === "single"}
 				className={activeTab === "single" ? "tab active" : "tab"}
 				onClick={onSingleTabClick}
-				role="tab"
 				type="button"
 			>
 				Single Adult
 			</button>
 			<button
-				aria-selected={activeTab === "household"}
+				aria-pressed={activeTab === "household"}
 				className={activeTab === "household" ? "tab active" : "tab"}
 				onClick={onHouseholdTabClick}
-				role="tab"
 				type="button"
 			>
 				Household

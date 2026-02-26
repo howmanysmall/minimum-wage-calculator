@@ -15,10 +15,12 @@ export function ZipInputControl({ onZipBlur, onZipChange, zip }: ZipInputControl
 				id="zip-input"
 				inputMode="numeric"
 				maxLength={5}
+				name="zip"
 				onBlur={onZipBlur}
 				onChange={onZipChange}
 				pattern="[0-9]*"
-				placeholder="e.g. 10001"
+				placeholder="e.g. 10001..."
+				spellCheck={false}
 				value={zip}
 			/>
 		</label>

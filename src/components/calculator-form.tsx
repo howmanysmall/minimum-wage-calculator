@@ -35,7 +35,11 @@ export function CalculatorForm({
 				monthlyCostsSectionProperties={monthlyCostsSectionProperties}
 				profileSectionProperties={profileSectionProperties}
 			/>
-			{resultError && <p className="status error">{resultError}</p>}
+			{resultError ? (
+				<p aria-live="polite" className="status error" role="alert">
+					{resultError}
+				</p>
+			) : undefined}
 			<button className="primary" type="submit">
 				Calculate Required Wage
 			</button>

@@ -37,7 +37,7 @@ export function CalculatorLayout({
 	savingsRatePct,
 }: CalculatorLayoutProperties): React.ReactNode {
 	return (
-		<main className="layout">
+		<main className="layout" id="calculator-main">
 			<CalculatorForm
 				assumptionsSectionProperties={assumptionsSectionProperties}
 				dataVersion={dataVersion}

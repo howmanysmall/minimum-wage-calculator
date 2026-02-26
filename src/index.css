@@ -1,3 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+:root {
+	--canvas-0: #f6f3eb;
+	--canvas-1: #ece8de;
+	--panel: rgba(251, 249, 244, 0.86);
+	--panel-border: rgba(49, 46, 35, 0.14);
+	--ink: #0d1b2a;
+	--ink-soft: #3f4a59;
+	--focus: #14532d;
+	color-scheme: light;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -9,8 +23,24 @@ body,
 	margin: 0;
 }
 
+body {
+	font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	color: var(--ink);
+	background:
+		radial-gradient(circle at 8% 2%, rgba(189, 141, 77, 0.28), transparent 34%),
+		radial-gradient(circle at 94% 13%, rgba(74, 126, 131, 0.22), transparent 38%),
+		linear-gradient(146deg, var(--canvas-0), var(--canvas-1));
+	text-rendering: optimizeLegibility;
+}
+
 button,
 input,
 select {
 	font: inherit;
+}
+
+::selection {
+	color: #f5f8ff;
+	background: #0d3b66;
 }

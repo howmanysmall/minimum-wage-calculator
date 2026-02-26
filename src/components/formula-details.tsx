@@ -8,10 +8,10 @@ interface FormulaDetailsProperties {
 export function FormulaDetails({ budgetLine, wageLine }: FormulaDetailsProperties): React.ReactNode {
 	return (
 		<details className="formula">
-			<summary>How this was calculated</summary>
+			<summary className="formula-summary">How This Was Calculated</summary>
 			<div className="formula-content">
-				<p className="mono">{budgetLine}</p>
-				<p className="mono">{wageLine}</p>
+				<p className="formula-line mono">{budgetLine}</p>
+				<p className="formula-line mono">{wageLine}</p>
 			</div>
 		</details>
 	);

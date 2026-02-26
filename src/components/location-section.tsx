@@ -19,8 +19,12 @@ export function LocationSection({
 				onZipLookupClick={onZipLookupClick}
 				zip={zip}
 			/>
-			{locationName && <p className="status ok">Area: {locationName}</p>}
-			{zipStatus && <p className="status">{zipStatus}</p>}
+			{locationName ? <p className="status ok">Area: {locationName}</p> : undefined}
+			{zipStatus ? (
+				<p aria-live="polite" className="status">
+					{zipStatus}
+				</p>
+			) : undefined}
 		</section>
 	);
 }

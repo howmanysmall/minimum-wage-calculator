@@ -11,6 +11,7 @@ export function ResultsGrid({ result }: ResultsGridProperties): React.ReactNode 
 	return (
 		<div className="result-grid">
 			<ResultCard
+				emphasis
 				label="Required Hourly Wage"
 				value={`${formatCurrency(roundToTwo(result.hourlyRequired))} / hr`}
 			/>

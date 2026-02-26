@@ -27,6 +27,10 @@ function buildWageLine(
 	return `W_min,r = (B_r * (1 + s + k)) / H = (${budgetValue} * (1 + ${savingsValue} + ${retirementValue})) / ${annualWorkHours}`;
 }
 
+function buildLiveSummary(result: WageResult): string {
+	return `Updated hourly wage target ${formatCurrency(roundToTwo(result.hourlyRequired))} per hour.`;
+}
+
 export function ResultsContent({
 	annualWorkHours,
 	result,
@@ -35,7 +39,11 @@ export function ResultsContent({
 }: ResultsContentProperties): React.ReactNode {
 	return (
 		<aside className="panel result-panel ready">
+			<p aria-live="polite" className="sr-only">
+				{buildLiveSummary(result)}
+			</p>
 			<h2>Results</h2>
+			<p className="result-kicker">Calculated from your current assumptions and monthly costs.</p>
 			<ResultsGrid result={result} />
 			<FormulaDetails
 				budgetLine={buildBudgetLine(result)}
