@@ -6,6 +6,6 @@
 		"types": ["bun"],
 	},
 	"extends": "./tsconfig.base.json",
-	"include": ["scripts/**/*.ts"],
+	"include": ["scripts/**/*.ts", "src/**/*.ts"],
 	"references": [{ "path": "./tsconfig.app.json" }],
 }
