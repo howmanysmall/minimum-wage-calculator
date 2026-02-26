@@ -4,7 +4,14 @@ import { defineConfig } from "vite";
 
 const viteConfig = defineConfig({
 	base: "./",
-	plugins: [react(), tailwindcss()],
+	plugins: [
+		react({
+			babel: {
+				plugins: [["babel-plugin-react-compiler"]],
+			},
+		}),
+		tailwindcss(),
+	],
 });
 
 // oxlint-disable-next-line import/no-default-export

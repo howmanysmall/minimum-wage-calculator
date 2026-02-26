@@ -15,14 +15,10 @@ export function calculateRequiredWage(input: WageInput): WageResult {
 	if (input.savingsRate < MIN_RATE || input.savingsRate > MAX_RATE) {
 		throw new Error("Savings rate must be between 0 and 1.");
 	}
-
 	if (input.retirementRate < MIN_RATE || input.retirementRate > MAX_RATE) {
 		throw new Error("Retirement rate must be between 0 and 1.");
 	}
-
-	if (input.annualWorkHours <= 0) {
-		throw new Error("Annual work hours must be greater than zero.");
-	}
+	if (input.annualWorkHours <= 0) throw new Error("Annual work hours must be greater than zero.");
 
 	const monthlyCosts = [
 		input.rentMonthly,

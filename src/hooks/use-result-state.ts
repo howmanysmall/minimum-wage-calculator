@@ -1,5 +1,4 @@
-import type { FormEventHandler } from "react";
-import { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { calculateRequiredWage } from "../lib/calc";
 import { isZipFormatValid, normalizeZip } from "../lib/data-lookup";
 import type { MonthlyCosts, WageResult } from "../types";
@@ -7,53 +6,50 @@ import type { MonthlyCosts, WageResult } from "../types";
 interface CalculationInput {
 	readonly annualWorkHours: number;
 	readonly currentCosts: MonthlyCosts;
-	readonly retirementRatePct: number;
-	readonly savingsRatePct: number;
+	readonly retirementRatePercent: number;
+	readonly savingsRatePercent: number;
 	readonly zip: string;
 }
 
 interface ResultState {
 	readonly result: WageResult | undefined;
 	readonly resultError: string;
-	readonly handleFormSubmit: FormEventHandler<HTMLFormElement>;
+	readonly handleFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
 }
 
 export function useResultState({
 	annualWorkHours,
 	currentCosts,
-	retirementRatePct,
-	savingsRatePct,
+	retirementRatePercent,
+	savingsRatePercent,
 	zip,
 }: CalculationInput): ResultState {
 	const [result, setResult] = useState<WageResult | undefined>(undefined);
 	const [resultError, setResultError] = useState("");
 
-	const handleFormSubmit = useCallback<FormEventHandler<HTMLFormElement>>(
-		(event) => {
-			event.preventDefault();
-			setResultError("");
-			if (!isZipFormatValid(normalizeZip(zip))) {
-				setResult(undefined);
-				setResultError("ZIP code is required and must be 5 digits.");
-				return;
-			}
+	function handleFormSubmit(event: React.SubmitEvent<HTMLFormElement>): void {
+		event.preventDefault();
+		setResultError("");
+		if (!isZipFormatValid(normalizeZip(zip))) {
+			setResult(undefined);
+			setResultError("ZIP code is required and must be 5 digits.");
+			return;
+		}
 
-			try {
-				const computedResult = calculateRequiredWage({
-					...currentCosts,
-					annualWorkHours: annualWorkHours,
-					retirementRate: retirementRatePct / 100,
-					savingsRate: savingsRatePct / 100,
-				});
-				setResult(computedResult);
-			} catch (error) {
-				const message = error instanceof Error ? error.message : "Unable to calculate required wage.";
-				setResult(undefined);
-				setResultError(message);
-			}
-		},
-		[annualWorkHours, currentCosts, retirementRatePct, savingsRatePct, zip],
-	);
+		try {
+			const computedResult = calculateRequiredWage({
+				...currentCosts,
+				annualWorkHours: annualWorkHours,
+				retirementRate: retirementRatePercent / 100,
+				savingsRate: savingsRatePercent / 100,
+			});
+			setResult(computedResult);
+		} catch (error) {
+			const message = error instanceof Error ? error.message : "Unable to calculate required wage.";
+			setResult(undefined);
+			setResultError(message);
+		}
+	}
 
 	return { handleFormSubmit, result, resultError };
 }

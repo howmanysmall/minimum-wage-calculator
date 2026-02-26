@@ -1,5 +1,5 @@
 import type { ChangeEventHandler, FocusEventHandler, MouseEventHandler } from "react";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { isZipFormatValid, lookupZipRent, normalizeZip } from "../lib/data-lookup";
 
 function lookupAndApplyRent(
@@ -29,7 +29,7 @@ function lookupAndApplyRent(
 	applyRentToAllProfiles(rentRecord.twoBedroom);
 }
 
-interface LocationState {
+export interface LocationState {
 	readonly locationName: string;
 	readonly zip: string;
 	readonly zipStatus: string;
@@ -43,17 +43,17 @@ export function useLocationState(applyRentToAllProfiles: (rentMonthly: number) =
 	const [zip, setZip] = useState("");
 	const [zipStatus, setZipStatus] = useState("");
 
-	const handleZipChange = useCallback<ChangeEventHandler<HTMLInputElement>>((event) => {
-		setZip(normalizeZip(event.target.value));
-	}, []);
+	function handleZipChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
+		setZip(normalizeZip(target.value));
+	}
 
-	const performLookup = useCallback(() => {
+	function performLookup(): void {
 		lookupAndApplyRent(zip, setZip, setZipStatus, setLocationName, applyRentToAllProfiles);
-	}, [applyRentToAllProfiles, zip]);
+	}
 
-	const handleZipBlur = useCallback<FocusEventHandler<HTMLInputElement>>(() => {
+	function handleZipBlur(): void {
 		if (normalizeZip(zip).length === 5) performLookup();
-	}, [performLookup, zip]);
+	}
 
 	return { handleZipBlur, handleZipChange, handleZipLookupClick: performLookup, locationName, zip, zipStatus };
 }

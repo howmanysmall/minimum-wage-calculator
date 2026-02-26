@@ -4,7 +4,7 @@ coverage
 .DS_Store
 *.log
 .tmp
-.tsbuildinfo
+**/.tsbuildinfo*
 
 .agents/skills/react-doctor
 .agents/skills/vercel-composition-patterns
@@ -20,3 +20,4 @@ coverage
 .factory/skills/vercel-composition-patterns
 .factory/skills/vercel-react-best-practices
 .factory/skills/web-design-guidelines
+.ts-build

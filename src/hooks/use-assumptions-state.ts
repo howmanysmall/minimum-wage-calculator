@@ -1,5 +1,5 @@
 import type { ChangeEventHandler } from "react";
-import { useCallback, useState } from "react";
+import React, { useState } from "react";
 import {
 	DEFAULT_ANNUAL_WORK_HOURS,
 	DEFAULT_RETIREMENT_RATE_PERCENT,
@@ -18,7 +18,7 @@ function normalizeHours(rawValue: string): number {
 	return Math.max(1, parsedValue);
 }
 
-interface AssumptionsState {
+export interface AssumptionsState {
 	readonly annualWorkHours: number;
 	readonly retirementRatePercent: number;
 	readonly savingsRatePercent: number;
@@ -31,17 +31,18 @@ export function useAssumptionsState(): AssumptionsState {
 	const [annualWorkHours, setAnnualWorkHours] = useState(DEFAULT_ANNUAL_WORK_HOURS);
 	const [retirementRatePercent, setRetirementRatePercent] = useState(DEFAULT_RETIREMENT_RATE_PERCENT);
 	const [savingsRatePercent, setSavingsRatePercent] = useState(DEFAULT_SAVINGS_RATE_PERCENT);
-	const handleSavingsRateChange = useCallback<ChangeEventHandler<HTMLInputElement>>((event) => {
-		setSavingsRatePercent(normalizePercent(event.target.value));
-	}, []);
 
-	const handleRetirementRateChange = useCallback<ChangeEventHandler<HTMLInputElement>>((event) => {
-		setRetirementRatePercent(normalizePercent(event.target.value));
-	}, []);
+	function handleSavingsRateChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
+		setSavingsRatePercent(normalizePercent(target.value));
+	}
 
-	const handleWorkHoursChange = useCallback<ChangeEventHandler<HTMLInputElement>>((event) => {
-		setAnnualWorkHours(normalizeHours(event.target.value));
-	}, []);
+	function handleRetirementRateChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
+		setRetirementRatePercent(normalizePercent(target.value));
+	}
+
+	function handleWorkHoursChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
+		setAnnualWorkHours(normalizeHours(target.value));
+	}
 
 	return {
 		annualWorkHours,

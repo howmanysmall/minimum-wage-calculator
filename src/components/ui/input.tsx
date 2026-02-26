@@ -1,4 +1,4 @@
-import type { ChangeEventHandler, FocusEventHandler, HTMLAttributes, HTMLInputTypeAttribute, ReactNode } from "react";
+import type { ChangeEventHandler, FocusEventHandler, HTMLAttributes, HTMLInputTypeAttribute } from "react";
 import React from "react";
 import { cn } from "../../lib/utils";
 
@@ -40,7 +40,7 @@ export function Input({
 	step,
 	type = "text",
 	value,
-}: InputProperties): ReactNode {
+}: InputProperties): React.ReactNode {
 	return (
 		<input
 			autoComplete={autoComplete}

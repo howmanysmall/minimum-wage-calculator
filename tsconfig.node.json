@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"composite": true,
+		"tsBuildInfoFile": "./.tsbuildinfo.node",
+		"types": ["node"],
+	},
+	"extends": "./tsconfig.base.json",
+	"include": ["vite.config.ts", "biome.jsonc", "knip.ts", "commitlint.config.ts"],
+}

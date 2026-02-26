@@ -20,7 +20,7 @@ interface CalculatorLayoutProperties {
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
 	readonly profileSectionProperties: ProfileSectionProperties;
 	readonly monthlyCostsSectionProperties: MonthlyCostsSectionProperties;
-	readonly onFormSubmit: React.FormEventHandler<HTMLFormElement>;
+	readonly onFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
 }
 
 export function CalculatorLayout({

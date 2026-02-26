@@ -12,10 +12,10 @@ export function FormulaDetails({ budgetLine, wageLine }: FormulaDetailsPropertie
 				How This Was Calculated
 			</summary>
 			<div className="space-y-2 pb-3">
-				<p className="border-border/70 bg-card/80 text-foreground rounded-md border px-3 py-2 font-mono text-xs leading-relaxed break-words">
+				<p className="border-border/70 bg-card/80 text-foreground rounded-md border px-3 py-2 font-mono text-xs leading-relaxed wrap-break-word">
 					{budgetLine}
 				</p>
-				<p className="border-border/70 bg-card/80 text-foreground rounded-md border px-3 py-2 font-mono text-xs leading-relaxed break-words">
+				<p className="border-border/70 bg-card/80 text-foreground rounded-md border px-3 py-2 font-mono text-xs leading-relaxed wrap-break-word">
 					{wageLine}
 				</p>
 			</div>

@@ -16,7 +16,7 @@ function getVariantClassName(variant: BadgeVariant): string {
 	return "bg-primary text-primary-foreground";
 }
 
-export function Badge({ children, className, variant = "default" }: BadgeProperties): ReactNode {
+export function Badge({ children, className, variant = "default" }: BadgeProperties): React.ReactNode {
 	return (
 		<span
 			className={cn(

@@ -39,8 +39,6 @@ export function ResultsContent({
 	retirementRatePercent,
 	savingsRatePercent,
 }: ResultsContentProperties): React.ReactNode {
-	const resultDescription = "Calculated from your current assumptions and monthly costs.";
-
 	return (
 		<aside>
 			<Card className="space-y-4 rounded-3xl px-5 py-5 sm:px-6 sm:py-6">
@@ -52,7 +50,9 @@ export function ResultsContent({
 				<Badge className="border-border/70 bg-secondary/86 rounded-full px-3 py-1 text-xs" variant="secondary">
 					Model Ready
 				</Badge>
-				<p className="text-muted-foreground text-sm leading-relaxed">{resultDescription}</p>
+				<p className="text-muted-foreground text-sm leading-relaxed">
+					Calculated from your current assumptions and monthly costs.
+				</p>
 				<ResultsGrid result={result} />
 				<FormulaDetails
 					budgetLine={buildBudgetLine(result)}

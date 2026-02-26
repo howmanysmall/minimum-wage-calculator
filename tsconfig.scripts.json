@@ -1,7 +1,11 @@
 {
 	"compilerOptions": {
-		"types": ["bun", "node"],
+		"composite": true,
+		"lib": ["ESNext"],
+		"tsBuildInfoFile": "./.tsbuildinfo.scripts",
+		"types": ["bun"],
 	},
 	"extends": "./tsconfig.base.json",
 	"include": ["scripts/**/*.ts"],
+	"references": [{ "path": "./tsconfig.app.json" }],
 }

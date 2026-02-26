@@ -13,7 +13,7 @@ import { Card } from "./ui/card";
 interface CalculatorFormProperties {
 	readonly dataVersion: VersionSnapshot;
 	readonly resultError: string;
-	readonly onFormSubmit: React.FormEventHandler<HTMLFormElement>;
+	readonly onFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
 	readonly locationSectionProperties: LocationSectionProperties;
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
 	readonly profileSectionProperties: ProfileSectionProperties;

@@ -17,9 +17,7 @@ function buildMonthlyCosts(rentMonthly: number, foodMonthly: number): MonthlyCos
 
 function getKnownZipRent(): number {
 	const rentRecord = lookupZipRent("76437");
-	if (!rentRecord) {
-		throw new TypeError("Expected rent snapshot data for ZIP 76437.");
-	}
+	if (!rentRecord) throw new TypeError("Expected rent snapshot data for ZIP 76437.");
 
 	return rentRecord.twoBedroom;
 }
