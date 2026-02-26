@@ -1,25 +1,25 @@
 {
-	"skills": {
-		"react-doctor": {
-			"computedHash": "efa8db174b3c60e27b34d76842e3a9a7c0e5e602fd4d66eec897372d0ce3f30b",
-			"source": "millionco/react-doctor",
-			"sourceType": "github"
-		},
-		"vercel-composition-patterns": {
-			"computedHash": "f98931159fa9c7fed043bcd18a891a46dcf89ababa38df13a4c5b7b30dc0ce07",
-			"source": "vercel-labs/agent-skills",
-			"sourceType": "github"
-		},
-		"vercel-react-best-practices": {
-			"computedHash": "5af404189f21fecdeca2d5881eaecf2596e17bd35ede9e3f1360ba21d1e61e10",
-			"source": "ddaakk/agent-skills",
-			"sourceType": "github"
-		},
-		"web-design-guidelines": {
-			"computedHash": "b9e85077d55864274b19e19b16e87ecef72cb1685ac5578fa4f3ae89deb45fd4",
-			"source": "ddaakk/agent-skills",
-			"sourceType": "github"
-		}
-	},
-	"version": 1
+  "version": 1,
+  "skills": {
+    "react-doctor": {
+      "source": "millionco/react-doctor",
+      "sourceType": "github",
+      "computedHash": "efa8db174b3c60e27b34d76842e3a9a7c0e5e602fd4d66eec897372d0ce3f30b"
+    },
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "f98931159fa9c7fed043bcd18a891a46dcf89ababa38df13a4c5b7b30dc0ce07"
+    },
+    "vercel-react-best-practices": {
+      "source": "ddaakk/agent-skills",
+      "sourceType": "github",
+      "computedHash": "5af404189f21fecdeca2d5881eaecf2596e17bd35ede9e3f1360ba21d1e61e10"
+    },
+    "web-design-guidelines": {
+      "source": "ddaakk/agent-skills",
+      "sourceType": "github",
+      "computedHash": "b9e85077d55864274b19e19b16e87ecef72cb1685ac5578fa4f3ae89deb45fd4"
+    }
+  }
 }

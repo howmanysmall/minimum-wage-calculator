@@ -1,0 +1,14 @@
+{
+	"mcpServers": {
+		"chrome-dev-tools": {
+			"args": [
+				"x",
+				"--bun",
+				"chrome-devtools-mcp@latest",
+				"--executablePath",
+				"/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome Beta"
+			],
+			"command": "bun"
+		}
+	}
+}
