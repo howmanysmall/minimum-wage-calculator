@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+:root {
+	--bg-a: #fef9c3;
+	--bg-b: #dbeafe;
+	--surface: rgba(255, 255, 255, 0.9);
+	--surface-strong: #ffffff;
+	--ink: #111827;
+	--ink-soft: #334155;
+	--line: rgba(15, 23, 42, 0.15);
+	--accent: #0f766e;
+	--accent-soft: #99f6e4;
+	--danger: #dc2626;
+	--radius: 18px;
+}
+
+.app-shell {
+	min-height: 100vh;
+	padding: 16px;
+	font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+	color: var(--ink);
+	background:
+		radial-gradient(circle at 90% 5%, rgba(14, 116, 144, 0.2), transparent 35%),
+		radial-gradient(circle at 8% 25%, rgba(234, 88, 12, 0.15), transparent 40%),
+		linear-gradient(140deg, var(--bg-a), var(--bg-b));
+}
+
+.hero {
+	max-width: 1100px;
+	margin: 8px auto 16px;
+}
+
+.hero h1 {
+	margin: 8px 0;
+	font-size: clamp(1.6rem, 4.4vw, 2.6rem);
+	line-height: 1.1;
+}
+
+.hero p {
+	margin: 0;
+	color: var(--ink-soft);
+}
+
+.eyebrow {
+	display: inline-block;
+	padding: 4px 10px;
+	margin: 0;
+	font-size: 0.82rem;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	background: rgba(17, 24, 39, 0.08);
+	border-radius: 999px;
+}
+
+.layout {
+	display: grid;
+	gap: 16px;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.panel {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+	backdrop-filter: blur(2px);
+}
+
+.form-panel {
+	padding: 18px;
+}
+
+.result-panel {
+	position: sticky;
+	bottom: 8px;
+	padding: 18px;
+}
+
+.result-panel.ready {
+	background: linear-gradient(155deg, rgba(255, 255, 255, 0.96), rgba(237, 254, 255, 0.95));
+}
+
+.section + .section {
+	margin-top: 18px;
+}
+
+.section h2,
+.result-panel h2 {
+	margin: 0 0 10px;
+	font-size: 1.1rem;
+}
+
+.zip-row {
+	display: grid;
+	gap: 10px;
+}
+
+.input-grid {
+	display: grid;
+	gap: 12px;
+}
+
+.three-up {
+	grid-template-columns: 1fr;
+}
+
+label {
+	display: grid;
+	gap: 6px;
+	font-weight: 500;
+}
+
+input,
+select {
+	width: 100%;
+	padding: 10px 12px;
+	font-size: 1rem;
+	color: var(--ink);
+	background: var(--surface-strong);
+	border: 1px solid var(--line);
+	border-radius: 12px;
+}
+
+input:focus,
+select:focus,
+button:focus {
+	outline: 2px solid var(--accent-soft);
+	outline-offset: 2px;
+}
+
+button {
+	padding: 10px 14px;
+	font-family: inherit;
+	font-weight: 600;
+	cursor: pointer;
+	border: 0;
+	border-radius: 12px;
+}
+
+button.primary {
+	width: 100%;
+	margin-top: 10px;
+	color: #f8fafc;
+	background: var(--accent);
+}
+
+button.secondary {
+	color: #115e59;
+	background: rgba(15, 118, 110, 0.12);
+}
+
+.tabs {
+	display: flex;
+	gap: 8px;
+}
+
+.tab {
+	flex: 1;
+	color: var(--ink-soft);
+	background: #ffffff;
+	border: 1px solid var(--line);
+}
+
+.tab.active {
+	color: #f8fafc;
+	background: #0f172a;
+}
+
+.household-controls {
+	display: grid;
+	gap: 10px;
+	margin-top: 12px;
+}
+
+.recommendation-row {
+	display: grid;
+	gap: 8px;
+	align-items: center;
+}
+
+.recommendation-row p {
+	margin: 0;
+	color: var(--ink-soft);
+}
+
+.hint {
+	font-size: 0.85rem;
+	font-weight: 400;
+	color: #475569;
+}
+
+.status {
+	margin: 8px 0 0;
+	font-size: 0.92rem;
+	color: #1e293b;
+}
+
+.status.ok {
+	color: #0f766e;
+}
+
+.status.error {
+	font-weight: 600;
+	color: var(--danger);
+}
+
+.footnote {
+	margin: 10px 0 0;
+	font-size: 0.82rem;
+	color: #475569;
+}
+
+.result-grid {
+	display: grid;
+	gap: 10px;
+}
+
+.result-grid article {
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid var(--line);
+	border-radius: 12px;
+}
+
+.result-label {
+	margin: 0;
+	font-size: 0.84rem;
+	color: #475569;
+}
+
+.result-value {
+	margin: 6px 0 0;
+	font-size: 1.2rem;
+	font-weight: 700;
+}
+
+.placeholder {
+	margin: 0;
+	color: #334155;
+}
+
+.formula {
+	padding-top: 10px;
+	margin-top: 12px;
+	border-top: 1px dashed var(--line);
+}
+
+.formula summary {
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.formula-content {
+	display: grid;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.mono {
+	font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@media (min-width: 700px) {
+	.three-up {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.zip-row {
+		grid-template-columns: 1fr auto;
+		align-items: end;
+	}
+
+	.recommendation-row {
+		grid-template-columns: 1fr auto;
+	}
+}
+
+@media (min-width: 980px) {
+	.layout {
+		grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.9fr);
+		align-items: start;
+	}
+
+	.result-panel {
+		top: 16px;
+		bottom: auto;
+	}
+}
