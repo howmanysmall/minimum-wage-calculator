@@ -5,3 +5,7 @@ coverage
 *.log
 .tmp
 .tsbuildinfo
+.agents/skills/react-doctor
+.agents/skills/vercel-composition-patterns
+.agents/skills/vercel-react-best-practices
+.agents/skills/web-design-guidelines

@@ -1,0 +1,9 @@
+{
+	"mcpServers": {
+		"npm-registry": {
+			"alwaysAllow": [],
+			"command": "npm-registry-mcp",
+			"disabled": false
+		}
+	}
+}
