@@ -13,7 +13,7 @@
 		},
 		"enabled": true,
 		"includes": [
-			"**/*.{json,jsonc,grit,ts,tsx,js,jsx,css,code-workspace}",
+			"**/*.{json,jsonc,grit,ts,tsx,js,jsx,css,html,code-workspace}",
 			"!plugins/oxc/**/*.js",
 			"!**/dist/**",
 			"!**/do-not-sync-ever/**",
@@ -45,7 +45,7 @@
 		"expand": "auto",
 		"formatWithErrors": true,
 		"includes": [
-			"**/*.{json,jsonc,grit,ts,tsx,js,jsx,css,code-workspace}",
+			"**/*.{json,jsonc,grit,ts,tsx,js,jsx,css,html,code-workspace}",
 			"!src/data/*.json",
 			"!**/plugins/oxc/**/*.js",
 			"!**/dist/**",
@@ -143,7 +143,7 @@
 		"domains": {},
 		"enabled": true,
 		"includes": [
-			"**/*.{json,jsonc,grit,ts,tsx,js,jsx,code-workspace}",
+			"**/*.{json,jsonc,grit,ts,tsx,js,jsx,css,html,code-workspace}",
 			"!plugins/oxc/**/*.js",
 			"!**/dist/**",
 			"!**/do-not-sync-ever/**",

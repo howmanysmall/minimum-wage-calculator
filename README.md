@@ -56,7 +56,7 @@ bun run build
 To refresh the HUD rent snapshot:
 
 ```bash
-bash scripts/update_snapshots.sh
+bash scripts/update-snapshots.sh
 ```
 
 This refresh script updates both:

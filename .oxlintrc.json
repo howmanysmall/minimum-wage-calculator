@@ -19,8 +19,8 @@
 	},
 	"extends": [],
 	"globals": {},
-	"ignorePatterns": ["**/dist/**", "**/do-not-sync-ever/**", "**/node_modules/**"],
-	"jsPlugins": [],
+	"ignorePatterns": ["**/dist/**", "**/do-not-sync-ever/**", "**/node_modules/**", "plugins/oxc/*.js"],
+	"jsPlugins": ["./plugins/oxc/small-rules.js"],
 	"overrides": [
 		{
 			"env": {
@@ -35,6 +35,23 @@
 				"max-lines-per-function": "off",
 				"no-console": "off",
 				"no-non-null-assertion": "off",
+			},
+		},
+		{
+			"files": ["plugins/oxc/typescript/**/*.ts"],
+			"rules": {
+				"import/no-default-export": "off",
+				"max-lines-per-function": "off",
+				"typescript/no-unnecessary-condition": "off",
+			},
+		},
+		{
+			"files": ["scripts/**/*.ts"],
+			"globals": {
+				"Bun": "readonly",
+			},
+			"rules": {
+				"import/no-nodejs-modules": "off",
 			},
 		},
 	],
@@ -227,6 +244,7 @@
 		],
 		"react/no-unknown-property": ["off"],
 		"require-yield": "error",
+		"small-rules/require-named-effect-functions": "error",
 		"sort-imports": "off",
 		"sort-keys": [
 			"off",

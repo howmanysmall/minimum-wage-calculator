@@ -1,2 +1,8 @@
+[install]
+auto = "auto"
+
+[install.scopes]
+"@jsr" = "https://npm.jsr.io"
+
 [test]
 preload = ["./src/test/setup-dom.ts"]
