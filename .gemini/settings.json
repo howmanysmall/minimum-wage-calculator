@@ -1,4 +1,5 @@
 {
+	"$schema": "https://raw.githubusercontent.com/google-gemini/gemini-cli/refs/heads/main/schemas/settings.schema.json",
 	"mcpServers": {
 		"chrome-dev-tools": {
 			"args": [
@@ -8,7 +9,14 @@
 				"--executablePath",
 				"/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome Beta"
 			],
-			"command": "bun"
+			"command": "bun",
+			"description": "Chrome DevTools MCP Server"
+		},
+		"gh-grep": {
+			"httpUrl": "https://mcp.grep.app"
+		},
+		"npm-registry": {
+			"command": "npm-registry-mcp"
 		}
 	}
 }
