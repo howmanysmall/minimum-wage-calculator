@@ -1,7 +1,7 @@
 import React from "react";
 import type { MonthlyCosts } from "../types";
 
-export interface CostInputProperties {
+interface CostInputProperties {
 	readonly costKey: keyof MonthlyCosts;
 	readonly label: string;
 	readonly hint: string;

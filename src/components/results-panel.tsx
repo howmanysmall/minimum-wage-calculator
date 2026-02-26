@@ -2,7 +2,7 @@ import React from "react";
 import type { WageResult } from "../types";
 import { ResultsContent } from "./results-content";
 
-export interface ResultsPanelProperties {
+interface ResultsPanelProperties {
 	readonly result: WageResult | undefined;
 	readonly savingsRatePercent: number;
 	readonly retirementRatePercent: number;

@@ -10,7 +10,7 @@ import type {
 	ProfileSectionProperties,
 } from "./section-types";
 
-export interface CalculatorSectionsProperties {
+interface CalculatorSectionsProperties {
 	readonly locationSectionProperties: LocationSectionProperties;
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
 	readonly profileSectionProperties: ProfileSectionProperties;

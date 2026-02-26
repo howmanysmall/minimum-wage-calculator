@@ -8,7 +8,7 @@ import type {
 	ProfileSectionProperties,
 } from "./section-types";
 
-export interface CalculatorFormProperties {
+interface CalculatorFormProperties {
 	readonly dataVersion: VersionSnapshot;
 	readonly resultError: string;
 	readonly onFormSubmit: React.FormEventHandler<HTMLFormElement>;

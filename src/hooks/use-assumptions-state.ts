@@ -18,7 +18,7 @@ function normalizeHours(rawValue: string): number {
 	return Math.max(1, parsedValue);
 }
 
-export interface AssumptionsState {
+interface AssumptionsState {
 	readonly annualWorkHours: number;
 	readonly retirementRatePercent: number;
 	readonly savingsRatePercent: number;

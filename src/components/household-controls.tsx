@@ -4,7 +4,7 @@ import type { HouseholdProfile } from "../types";
 import { FoodPlanSelect } from "./food-plan-select";
 import { NumericInput } from "./numeric-input";
 
-export interface HouseholdControlsProperties {
+interface HouseholdControlsProperties {
 	readonly householdFoodRecommendation: number;
 	readonly householdProfile: HouseholdProfile;
 	readonly onAdultsChange: React.ChangeEventHandler<HTMLInputElement>;

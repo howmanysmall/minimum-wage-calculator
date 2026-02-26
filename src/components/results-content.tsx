@@ -4,7 +4,7 @@ import type { WageResult } from "../types";
 import { FormulaDetails } from "./formula-details";
 import { ResultsGrid } from "./results-grid";
 
-export interface ResultsContentProperties {
+interface ResultsContentProperties {
 	readonly annualWorkHours: number;
 	readonly result: WageResult;
 	readonly retirementRatePercent: number;

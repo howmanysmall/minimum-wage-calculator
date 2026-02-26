@@ -9,7 +9,7 @@ import type {
 	ProfileSectionProperties,
 } from "./section-types";
 
-export interface CalculatorLayoutProperties {
+interface CalculatorLayoutProperties {
 	readonly annualWorkHours: number;
 	readonly dataVersion: VersionSnapshot;
 	readonly result?: WageResult | undefined;

@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface ZipInputControlProperties {
+interface ZipInputControlProperties {
 	readonly zip: string;
 	readonly onZipBlur: React.FocusEventHandler<HTMLInputElement>;
 	readonly onZipChange: React.ChangeEventHandler<HTMLInputElement>;

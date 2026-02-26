@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface NumericInputProperties {
+interface NumericInputProperties {
 	readonly inputId: string;
 	readonly label: string;
 	readonly min: number;

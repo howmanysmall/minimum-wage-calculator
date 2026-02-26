@@ -1,7 +1,7 @@
 import React from "react";
 import type { HouseholdProfile } from "../types";
 
-export interface FoodPlanSelectProperties {
+interface FoodPlanSelectProperties {
 	readonly onChange: React.ChangeEventHandler<HTMLSelectElement>;
 	readonly value: HouseholdProfile["foodPlanTier"];
 }

@@ -29,7 +29,7 @@ function lookupAndApplyRent(
 	applyRentToAllProfiles(rentRecord.twoBedroom);
 }
 
-export interface LocationState {
+interface LocationState {
 	readonly locationName: string;
 	readonly zip: string;
 	readonly zipStatus: string;

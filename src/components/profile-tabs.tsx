@@ -1,7 +1,7 @@
 import React from "react";
 import type { TabId } from "../types";
 
-export interface ProfileTabsProperties {
+interface ProfileTabsProperties {
 	readonly activeTab: TabId;
 	readonly onHouseholdTabClick: React.MouseEventHandler<HTMLButtonElement>;
 	readonly onSingleTabClick: React.MouseEventHandler<HTMLButtonElement>;

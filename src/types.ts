@@ -10,13 +10,11 @@ export interface MonthlyCosts {
 	readonly healthMonthly: number;
 }
 
-export interface CoreAssumptions {
+export interface WageInput extends MonthlyCosts {
 	readonly savingsRate: number;
 	readonly retirementRate: number;
 	readonly annualWorkHours: number;
 }
-
-export interface WageInput extends MonthlyCosts, CoreAssumptions {}
 
 export interface WageResult {
 	readonly monthlyBudget: number;

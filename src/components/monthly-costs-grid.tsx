@@ -4,7 +4,7 @@ import { COST_FIELDS } from "../lib/calculator-constants";
 import type { MonthlyCosts } from "../types";
 import { CostInput } from "./cost-input";
 
-export interface MonthlyCostsGridProperties {
+interface MonthlyCostsGridProperties {
 	readonly costs: MonthlyCosts;
 	readonly onCostInputChange: ChangeEventHandler<HTMLInputElement>;
 }

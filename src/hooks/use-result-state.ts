@@ -12,7 +12,7 @@ interface CalculationInput {
 	readonly zip: string;
 }
 
-export interface ResultState {
+interface ResultState {
 	readonly result: WageResult | undefined;
 	readonly resultError: string;
 	readonly handleFormSubmit: FormEventHandler<HTMLFormElement>;

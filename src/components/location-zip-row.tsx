@@ -1,7 +1,7 @@
 import React from "react";
 import { ZipInputControl } from "./zip-input-control";
 
-export interface LocationZipRowProperties {
+interface LocationZipRowProperties {
 	readonly zip: string;
 	readonly onZipBlur: React.FocusEventHandler<HTMLInputElement>;
 	readonly onZipChange: React.ChangeEventHandler<HTMLInputElement>;

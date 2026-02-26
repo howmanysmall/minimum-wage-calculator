@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface ResultCardProperties {
+interface ResultCardProperties {
 	readonly label: string;
 	readonly value: string;
 }

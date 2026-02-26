@@ -12,7 +12,7 @@ function normalizeWholeNumber(rawValue: string, minimumValue: number): number {
 	return Math.max(minimumValue, Math.floor(parsedValue));
 }
 
-export interface ProfileState {
+interface ProfileState {
 	readonly activeTab: TabId;
 	readonly householdProfile: HouseholdProfile;
 	readonly handleAdultsChange: ChangeEventHandler<HTMLInputElement>;

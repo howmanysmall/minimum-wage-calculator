@@ -3,7 +3,7 @@ import { formatCurrency, roundToTwo } from "../lib/format";
 import type { WageResult } from "../types";
 import { ResultCard } from "./result-card";
 
-export interface ResultsGridProperties {
+interface ResultsGridProperties {
 	readonly result: WageResult;
 }
 
