@@ -190,6 +190,11 @@
 		"eslint": { "disabled": true }
 	},
 	"mcp": {
+		"chrome-dev-tools": {
+			"command": ["bun", "x", "--bun", "chrome-devtools-mcp@latest"],
+			"enabled": true,
+			"type": "local"
+		},
 		"context7": {
 			"enabled": true,
 			"headers": { "CONTEXT7_API_KEY": "{env:CONTEXT7_API_KEY}" },

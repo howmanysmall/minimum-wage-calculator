@@ -1,0 +1,10 @@
+{
+	"inputs": [],
+	"servers": {
+		"chrome-devtools-mcp": {
+			"args": ["--registry", "https://registry.npmjs.org", "chrome-devtools-mcp@0.18.1"],
+			"command": "npx",
+			"type": "stdio",
+		},
+	},
+}
