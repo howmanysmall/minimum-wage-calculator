@@ -1,5 +1,7 @@
 import React from "react";
 import type { MonthlyCosts } from "../types";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 interface CostInputProperties {
 	readonly costKey: keyof MonthlyCosts;
@@ -19,10 +21,13 @@ export function CostInput({
 	value,
 }: CostInputProperties): React.ReactNode {
 	return (
-		<label htmlFor={costKey}>
-			{label}
-			<input
+		<div className="space-y-2">
+			<Label className="text-foreground/95 text-sm font-semibold" htmlFor={costKey}>
+				{label}
+			</Label>
+			<Input
 				autoComplete="off"
+				className="h-11 [font-variant-numeric:tabular-nums]"
 				id={costKey}
 				min={0}
 				name={costKey}
@@ -31,7 +36,7 @@ export function CostInput({
 				type="number"
 				value={value}
 			/>
-			<span className="hint">{hint}</span>
-		</label>
+			<p className="text-muted-foreground text-xs leading-relaxed">{hint}</p>
+		</div>
 	);
 }

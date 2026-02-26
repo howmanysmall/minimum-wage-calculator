@@ -11,7 +11,7 @@ interface MonthlyCostsGridProperties {
 
 export function MonthlyCostsGrid({ costs, onCostInputChange }: MonthlyCostsGridProperties): React.ReactNode {
 	return (
-		<div className="input-grid">
+		<div className="grid gap-4">
 			{COST_FIELDS.map((field) => (
 				<CostInput
 					costKey={field.key}

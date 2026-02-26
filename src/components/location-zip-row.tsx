@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "./ui/button";
 import { ZipInputControl } from "./zip-input-control";
 
 interface LocationZipRowProperties {
@@ -15,11 +16,16 @@ export function LocationZipRow({
 	zip,
 }: LocationZipRowProperties): React.ReactNode {
 	return (
-		<div className="zip-row">
+		<div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
 			<ZipInputControl onZipBlur={onZipBlur} onZipChange={onZipChange} zip={zip} />
-			<button className="secondary" onClick={onZipLookupClick} type="button">
+			<Button
+				className="h-11 rounded-xl px-4 md:min-w-32"
+				onClick={onZipLookupClick}
+				type="button"
+				variant="outline"
+			>
 				Use ZIP Rent
-			</button>
+			</Button>
 		</div>
 	);
 }

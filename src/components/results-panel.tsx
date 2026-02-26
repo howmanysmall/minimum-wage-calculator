@@ -3,6 +3,7 @@ import type { WageResult } from "../types";
 import { ResultCard } from "./result-card";
 import { ResultsContent } from "./results-content";
 import { ResultsHintItem } from "./results-hint-item";
+import { Card } from "./ui/card";
 
 interface ResultsPanelProperties {
 	readonly result: WageResult | undefined;
@@ -19,20 +20,20 @@ export function ResultsPanel({
 }: ResultsPanelProperties): React.ReactNode {
 	if (!result) {
 		return (
-			<aside className="panel result-panel empty">
-				<h2>Results</h2>
-				<p className="placeholder">
-					Enter your ZIP and monthly costs, then calculate to generate hourly, monthly, and annual targets.
-				</p>
-				<div className="result-grid preview-grid">
+			<aside>
+				<Card className="space-y-4 rounded-3xl px-5 py-5 sm:px-6 sm:py-6">
+					<p className="section-kicker">Output</p>
+					<h2 className="text-foreground text-2xl tracking-tight">Results</h2>
+					<p className="text-muted-foreground text-sm leading-relaxed">
+						Enter your ZIP and monthly costs, then calculate to generate hourly, monthly, and annual
+						targets.
+					</p>
 					<ResultCard ghost label="Required Hourly Wage" value="-- / hr" />
 					<ResultCard ghost label="Required Monthly Gross" value="--" />
-				</div>
-				<div className="results-hint-list">
 					<ResultsHintItem text="Use ZIP Rent to auto-fill housing costs from HUD." />
 					<ResultsHintItem text="Adjust savings and retirement assumptions before running the model." />
 					<ResultsHintItem text="Switch between Single Adult and Household for food baseline differences." />
-				</div>
+				</Card>
 			</aside>
 		);
 	}

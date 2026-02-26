@@ -11,9 +11,10 @@ export function AssumptionsSection({
 	savingsRatePct,
 }: AssumptionsSectionProperties): React.ReactNode {
 	return (
-		<section className="section">
-			<h2>Core Assumptions</h2>
-			<div className="input-grid three-up">
+		<section className="section-shell">
+			<p className="section-kicker">Parameters</p>
+			<h2 className="text-foreground mb-3 text-xl font-semibold tracking-tight">Core Assumptions</h2>
+			<div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
 				<NumericInput
 					inputId="savings-rate"
 					label="Savings % (s)"

@@ -9,7 +9,7 @@ interface ResultsGridProperties {
 
 export function ResultsGrid({ result }: ResultsGridProperties): React.ReactNode {
 	return (
-		<div className="result-grid">
+		<div className="grid gap-3">
 			<ResultCard
 				emphasis
 				label="Required Hourly Wage"

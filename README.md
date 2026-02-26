@@ -69,6 +69,21 @@ This refresh script updates both:
 
 GitHub Actions workflow is included at `.github/workflows/deploy.yml` for GitHub Pages.
 
+- Pushes to `main` deploy automatically.
+- To deploy immediately from CLI, run:
+
+```bash
+bun run publish:pages
+```
+
+- To publish a different branch/ref:
+
+```bash
+bun run publish:pages -- my-branch
+```
+
+- One-time repo setting: in GitHub `Settings -> Pages`, set Source to `GitHub Actions`.
+
 ## Source links
 
 - HUD FMR/SAFMR: <https://www.huduser.gov/portal/datasets/fmr.html>

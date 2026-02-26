@@ -1,5 +1,6 @@
 import React from "react";
 import type { TabId } from "../types";
+import { Button } from "./ui/button";
 
 interface ProfileTabsProperties {
 	readonly activeTab: TabId;
@@ -13,23 +14,23 @@ export function ProfileTabs({
 	onSingleTabClick,
 }: ProfileTabsProperties): React.ReactNode {
 	return (
-		<div className="tabs">
-			<button
-				aria-pressed={activeTab === "single"}
-				className={activeTab === "single" ? "tab active" : "tab"}
+		<div className="border-border/65 bg-background/48 grid grid-cols-2 gap-2 rounded-xl border p-1.5">
+			<Button
+				className="h-10 rounded-lg font-semibold"
 				onClick={onSingleTabClick}
 				type="button"
+				variant={activeTab === "single" ? "secondary" : "ghost"}
 			>
 				Single Adult
-			</button>
-			<button
-				aria-pressed={activeTab === "household"}
-				className={activeTab === "household" ? "tab active" : "tab"}
+			</Button>
+			<Button
+				className="h-10 rounded-lg font-semibold"
 				onClick={onHouseholdTabClick}
 				type="button"
+				variant={activeTab === "household" ? "secondary" : "ghost"}
 			>
 				Household
-			</button>
+			</Button>
 		</div>
 	);
 }

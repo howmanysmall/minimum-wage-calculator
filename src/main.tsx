@@ -1,7 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";
-import appStyles from "./app.css?inline";
 import baseStyles from "./index.css?inline";
 
 function ensureStyleElement(styleId: string, styleContent: string): void {
@@ -21,7 +20,6 @@ function getRootElement(): HTMLElement {
 	return rootElement;
 }
 
-ensureStyleElement("app", appStyles);
 ensureStyleElement("base", baseStyles);
 
 createRoot(getRootElement()).render(

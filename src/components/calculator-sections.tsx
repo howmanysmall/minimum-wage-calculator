@@ -79,7 +79,7 @@ export function CalculatorSections({
 	const handleCostInputChange = monthlyCostsSectionProperties.onCostInputChange;
 
 	return (
-		<>
+		<div className="stagger-in space-y-4">
 			<LocationSection
 				locationName={locationSectionProperties.locationName}
 				onZipBlur={locationHandlers.handleZipBlur}
@@ -111,6 +111,6 @@ export function CalculatorSections({
 				costs={monthlyCostsSectionProperties.costs}
 				onCostInputChange={handleCostInputChange}
 			/>
-		</>
+		</div>
 	);
 }

@@ -85,18 +85,19 @@ export function App(): React.ReactNode {
 	const profileSectionProperties = createProfileSectionProperties(profileState, costsState);
 
 	return (
-		<div className="relative min-h-screen px-4 py-6 sm:px-6 lg:px-8">
+		<div className="relative min-h-screen overflow-x-hidden px-4 py-6 sm:px-6 lg:px-10">
 			<div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-				<div className="absolute -top-28 -left-18 size-72 rounded-full bg-amber-300/40 blur-3xl sm:size-96" />
-				<div className="absolute top-14 -right-18 size-72 rounded-full bg-teal-300/30 blur-3xl sm:size-96" />
+				<div className="bg-primary/16 absolute -top-44 left-1/5 h-[30rem] w-[30rem] rounded-full blur-[140px]" />
+				<div className="absolute -top-8 -right-40 h-[28rem] w-[28rem] rounded-full bg-slate-400/10 blur-[136px]" />
+				<div className="absolute -bottom-44 left-1/2 h-[24rem] w-[24rem] -translate-x-1/2 rounded-full bg-slate-600/10 blur-[140px]" />
 			</div>
 			<a
-				className="sr-only rounded-lg bg-slate-950 px-3 py-2 text-sm font-semibold text-white focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
+				className="bg-primary text-primary-foreground sr-only rounded-lg px-3 py-2 text-sm font-semibold focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
 				href="#calculator-main"
 			>
 				Skip to calculator
 			</a>
-			<div className="mx-auto flex max-w-7xl flex-col gap-6">
+			<div className="mx-auto flex w-full max-w-7xl flex-col gap-7 pb-10 lg:gap-8">
 				<AppHeader />
 				<CalculatorLayout
 					annualWorkHours={assumptionsState.annualWorkHours}

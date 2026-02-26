@@ -1,4 +1,6 @@
 import React from "react";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 interface ZipInputControlProperties {
 	readonly zip: string;
@@ -8,10 +10,13 @@ interface ZipInputControlProperties {
 
 export function ZipInputControl({ onZipBlur, onZipChange, zip }: ZipInputControlProperties): React.ReactNode {
 	return (
-		<label htmlFor="zip-input">
-			ZIP Code
-			<input
+		<div className="space-y-2">
+			<Label className="text-foreground/95 text-sm font-semibold" htmlFor="zip-input">
+				ZIP Code
+			</Label>
+			<Input
 				autoComplete="postal-code"
+				className="h-11 [font-variant-numeric:tabular-nums]"
 				id="zip-input"
 				inputMode="numeric"
 				maxLength={5}
@@ -19,10 +24,11 @@ export function ZipInputControl({ onZipBlur, onZipChange, zip }: ZipInputControl
 				onBlur={onZipBlur}
 				onChange={onZipChange}
 				pattern="[0-9]*"
-				placeholder="e.g. 10001..."
+				placeholder="e.g. 10001…"
 				spellCheck={false}
+				type="text"
 				value={zip}
 			/>
-		</label>
+		</div>
 	);
 }
