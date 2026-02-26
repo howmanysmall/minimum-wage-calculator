@@ -31,11 +31,12 @@
 			"indentStyle": "tab",
 			"indentWidth": 4,
 			"lineWidth": 120,
-			"quoteStyle": "double"
+			"quoteStyle": "double",
+			"trailingNewline": true
 		},
 		"globals": [],
 		"linter": { "enabled": true },
-		"parser": {}
+		"parser": { "allowWrongLineComments": true, "cssModules": true, "tailwindDirectives": true }
 	},
 
 	"formatter": {
