@@ -4,9 +4,11 @@
 		"actions": {
 			"recommended": true,
 			"source": {
+				"noDuplicateClasses": "on",
 				"organizeImports": "on",
 				"recommended": true,
 				"useSortedAttributes": "on",
+				"useSortedInterfaceMembers": "on",
 				"useSortedKeys": "on",
 				"useSortedProperties": "on"
 			}

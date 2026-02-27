@@ -3,7 +3,7 @@ import {
 	getFoodBaselineForSingleAdult,
 	getHouseholdFoodBaseline,
 	isZipFormatValid,
-	lookupZipRent,
+	lookupZipRentAsync,
 	normalizeZip,
 } from "./data-lookup";
 
@@ -14,8 +14,8 @@ describe("data lookup helpers", () => {
 		expect(isZipFormatValid("1000")).toBe(false);
 	});
 
-	test("returns HUD snapshot rent data for a known ZIP", () => {
-		const record = lookupZipRent("76437");
+	test("returns HUD snapshot rent data for a known ZIP", async () => {
+		const record = await lookupZipRentAsync("76437");
 		expect(record).toBeDefined();
 		expect(record?.twoBedroom).toBe(1090);
 	});

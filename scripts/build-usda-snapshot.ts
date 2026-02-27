@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 
 import { Command } from "@jsr/cliffy__command";
+import { write } from "bun";
 import type { FoodSnapshot } from "../src/types";
 
 type TierName = "low" | "moderate" | "liberal";
@@ -11,9 +12,9 @@ interface ThriftyValues {
 }
 
 interface TierValues {
+	readonly liberal: number;
 	readonly low: number;
 	readonly moderate: number;
-	readonly liberal: number;
 }
 
 interface ThreeLevelValues {
@@ -251,7 +252,7 @@ async function parseUsdaFoodSnapshotAsync(sourceUrl: string): Promise<FoodSnapsh
 
 export async function buildUsdaSnapshotAsync(output: string, sourceUrl: string): Promise<void> {
 	const payload = await parseUsdaFoodSnapshotAsync(sourceUrl);
-	await Bun.write(output, JSON.stringify(payload), { createPath: true });
+	await write(output, JSON.stringify(payload), { createPath: true });
 	console.log(`Wrote USDA food snapshot (${payload.sourceMonth} ${payload.sourceYear}) -> ${output}`);
 }
 
