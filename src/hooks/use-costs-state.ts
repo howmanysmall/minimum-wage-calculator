@@ -1,5 +1,5 @@
 import type { ChangeEventHandler, MouseEventHandler } from "react";
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 import { BASE_MONTHLY_COSTS } from "../lib/calculator-constants";
 import { getFoodBaselineForSingleAdult, getHouseholdFoodBaseline } from "../lib/data-lookup";
 import type { HouseholdProfile, MonthlyCosts, TabId } from "../types";
@@ -23,16 +23,15 @@ function normalizeCost(rawValue: string): number {
 	return Math.max(0, parsedValue);
 }
 
-export function useCostsState(
-	activeTab: TabId,
-	householdProfile: HouseholdProfile,
-): {
-	currentCosts: MonthlyCosts;
-	householdFoodRecommendation: number;
-	handleApplyHouseholdFoodRecommendation: MouseEventHandler<HTMLButtonElement>;
-	handleCostInputChange: ChangeEventHandler<HTMLInputElement>;
-	applyRentToAllProfiles: (rentMonthly: number) => void;
-} {
+export interface CostsState {
+	readonly applyRentToAllProfiles: (rentMonthly: number) => void;
+	readonly currentCosts: MonthlyCosts;
+	readonly handleApplyHouseholdFoodRecommendation: MouseEventHandler<HTMLButtonElement>;
+	readonly handleCostInputChange: ChangeEventHandler<HTMLInputElement>;
+	readonly householdFoodRecommendation: number;
+}
+
+export function useCostsState(activeTab: TabId, householdProfile: HouseholdProfile): CostsState {
 	const [singleCosts, setSingleCosts] = useState<MonthlyCosts>({
 		...BASE_MONTHLY_COSTS,
 		foodMonthly: getFoodBaselineForSingleAdult("moderate"),
@@ -42,27 +41,28 @@ export function useCostsState(
 		foodMonthly: getHouseholdFoodBaseline({ adults: 1, children: 0, foodPlanTier: "moderate" }),
 	});
 	const currentCosts = activeTab === "single" ? singleCosts : householdCosts;
-	const householdFoodRecommendation = useMemo(() => getHouseholdFoodBaseline(householdProfile), [householdProfile]);
-	const handleCostInputChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
-		(event) => {
-			if (!isMonthlyCostKey(event.target.id)) return;
 
-			const nextValue = normalizeCost(event.target.value);
-			if (activeTab === "single") {
-				setSingleCosts((previousCosts) => ({ ...previousCosts, [event.target.id]: nextValue }));
-				return;
-			}
-			setHouseholdCosts((previousCosts) => ({ ...previousCosts, [event.target.id]: nextValue }));
-		},
-		[activeTab],
-	);
-	const handleApplyHouseholdFoodRecommendation = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+	const householdFoodRecommendation = getHouseholdFoodBaseline(householdProfile);
+	function handleCostInputChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
+		if (!isMonthlyCostKey(target.id)) return;
+
+		const nextValue = normalizeCost(target.value);
+		if (activeTab === "single") {
+			setSingleCosts((previousCosts) => ({ ...previousCosts, [target.id]: nextValue }));
+			return;
+		}
+		setHouseholdCosts((previousCosts) => ({ ...previousCosts, [target.id]: nextValue }));
+	}
+
+	function handleApplyHouseholdFoodRecommendation(): void {
 		setHouseholdCosts((previousCosts) => ({ ...previousCosts, foodMonthly: householdFoodRecommendation }));
-	}, [householdFoodRecommendation]);
-	const applyRentToAllProfiles = useCallback((rentMonthly: number) => {
+	}
+
+	function applyRentToAllProfiles(rentMonthly: number): void {
 		setSingleCosts((previousCosts) => ({ ...previousCosts, rentMonthly }));
 		setHouseholdCosts((previousCosts) => ({ ...previousCosts, rentMonthly }));
-	}, []);
+	}
+
 	return {
 		applyRentToAllProfiles,
 		currentCosts,

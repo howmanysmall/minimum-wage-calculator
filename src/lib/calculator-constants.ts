@@ -1,9 +1,9 @@
 import type { MonthlyCosts } from "../types";
 
 interface CostField {
+	readonly hint: string;
 	readonly key: keyof MonthlyCosts;
 	readonly label: string;
-	readonly hint: string;
 	readonly step?: string;
 }
 
@@ -19,7 +19,7 @@ export const BASE_MONTHLY_COSTS: Omit<MonthlyCosts, "foodMonthly"> = {
 	utilitiesMonthly: 240,
 };
 
-export const COST_FIELDS: Array<CostField> = [
+export const COST_FIELDS: ReadonlyArray<CostField> = [
 	{ hint: "HUD 2BR SAFMR autofill from ZIP when available.", key: "rentMonthly", label: "Rent (H_r)" },
 	{ hint: "USDA food-plan baseline, editable.", key: "foodMonthly", label: "Food (F_p)" },
 	{ hint: "Monthly transit + fuel + rideshare.", key: "transportMonthly", label: "Transport (T_t)" },

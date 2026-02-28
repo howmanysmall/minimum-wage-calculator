@@ -7,16 +7,18 @@ import type {
 	MonthlyCostsSectionProperties,
 	ProfileSectionProperties,
 } from "./components/section-types";
+import type { AssumptionsState } from "./hooks/use-assumptions-state";
 import { useAssumptionsState } from "./hooks/use-assumptions-state";
+import type { CostsState } from "./hooks/use-costs-state";
 import { useCostsState } from "./hooks/use-costs-state";
+import type { LocationState } from "./hooks/use-location-state";
 import { useLocationState } from "./hooks/use-location-state";
+import type { ProfileState } from "./hooks/use-profile-state";
 import { useProfileState } from "./hooks/use-profile-state";
 import { useResultState } from "./hooks/use-result-state";
 import { getDataVersion } from "./lib/data-lookup";
 
-function createAssumptionsSectionProperties(
-	assumptionsState: ReturnType<typeof useAssumptionsState>,
-): AssumptionsSectionProperties {
+function createAssumptionsSectionProperties(assumptionsState: AssumptionsState): AssumptionsSectionProperties {
 	return {
 		annualWorkHours: assumptionsState.annualWorkHours,
 		onRetirementRateChange: assumptionsState.handleRetirementRateChange,
@@ -27,9 +29,7 @@ function createAssumptionsSectionProperties(
 	};
 }
 
-function createLocationSectionProperties(
-	locationState: ReturnType<typeof useLocationState>,
-): LocationSectionProperties {
+function createLocationSectionProperties(locationState: LocationState): LocationSectionProperties {
 	return {
 		locationName: locationState.locationName,
 		onZipBlur: locationState.handleZipBlur,
@@ -40,19 +40,14 @@ function createLocationSectionProperties(
 	};
 }
 
-function createMonthlyCostsSectionProperties(
-	costsState: ReturnType<typeof useCostsState>,
-): MonthlyCostsSectionProperties {
+function createMonthlyCostsSectionProperties(costsState: CostsState): MonthlyCostsSectionProperties {
 	return {
 		costs: costsState.currentCosts,
 		onCostInputChange: costsState.handleCostInputChange,
 	};
 }
 
-function createProfileSectionProperties(
-	profileState: ReturnType<typeof useProfileState>,
-	costsState: ReturnType<typeof useCostsState>,
-): ProfileSectionProperties {
+function createProfileSectionProperties(profileState: ProfileState, costsState: CostsState): ProfileSectionProperties {
 	return {
 		activeTab: profileState.activeTab,
 		householdFoodRecommendation: costsState.householdFoodRecommendation,
@@ -75,8 +70,8 @@ export function App(): React.ReactNode {
 	const resultState = useResultState({
 		annualWorkHours: assumptionsState.annualWorkHours,
 		currentCosts: costsState.currentCosts,
-		retirementRatePct: assumptionsState.retirementRatePercent,
-		savingsRatePct: assumptionsState.savingsRatePercent,
+		retirementRatePercent: assumptionsState.retirementRatePercent,
+		savingsRatePercent: assumptionsState.savingsRatePercent,
 		zip: locationState.zip,
 	});
 	const assumptionsSectionProperties = createAssumptionsSectionProperties(assumptionsState);
@@ -87,9 +82,9 @@ export function App(): React.ReactNode {
 	return (
 		<div className="relative min-h-screen overflow-x-hidden px-4 py-6 sm:px-6 lg:px-10">
 			<div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-				<div className="bg-primary/16 absolute -top-44 left-1/5 h-[30rem] w-[30rem] rounded-full blur-[140px]" />
-				<div className="absolute -top-8 -right-40 h-[28rem] w-[28rem] rounded-full bg-slate-400/10 blur-[136px]" />
-				<div className="absolute -bottom-44 left-1/2 h-[24rem] w-[24rem] -translate-x-1/2 rounded-full bg-slate-600/10 blur-[140px]" />
+				<div className="bg-primary/16 absolute -top-44 left-1/5 h-120 w-120 rounded-full blur-[140px]" />
+				<div className="absolute -top-8 -right-40 h-112 w-md rounded-full bg-slate-400/10 blur-[136px]" />
+				<div className="absolute -bottom-44 left-1/2 h-96 w-[24rem] -translate-x-1/2 rounded-full bg-slate-600/10 blur-[140px]" />
 			</div>
 			<a
 				className="bg-primary text-primary-foreground sr-only rounded-lg px-3 py-2 text-sm font-semibold focus:not-sr-only focus:absolute focus:top-4 focus:left-4"

@@ -184,8 +184,6 @@
 		}
 	},
 	"instructions": ["./AGENTS.md"],
-	"keybinds": { "model_list": "ctrl+m" },
-	"layout": "stretch",
 	"lsp": {
 		"eslint": { "disabled": true }
 	},
@@ -199,7 +197,7 @@
 				"--executablePath",
 				"/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome Beta"
 			],
-			"enabled": true,
+			"enabled": false,
 			"type": "local"
 		},
 		"context7": {
@@ -267,6 +265,5 @@
 	},
 	"share": "manual",
 	"tools": {},
-	"tui": {},
 	"username": "minimum-wage-calculator"
 }

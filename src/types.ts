@@ -1,62 +1,89 @@
-export type FoodPlanTier = "thrifty" | "low" | "moderate" | "liberal";
-export type TabId = "single" | "household";
+import { regex, type } from "arktype";
 
-export interface MonthlyCosts {
-	readonly rentMonthly: number;
-	readonly foodMonthly: number;
-	readonly transportMonthly: number;
-	readonly internetPhoneMonthly: number;
-	readonly utilitiesMonthly: number;
-	readonly healthMonthly: number;
-}
+export const isFoodPlanTier = type('"thrifty" | "low" | "moderate" | "liberal"');
+export type FoodPlanTier = typeof isFoodPlanTier.infer;
 
-export interface WageInput extends MonthlyCosts {
-	readonly savingsRate: number;
-	readonly retirementRate: number;
-	readonly annualWorkHours: number;
-}
+export const isTabId = type('"single" | "household"');
+export type TabId = typeof isTabId.infer;
 
-export interface WageResult {
-	readonly monthlyBudget: number;
-	readonly monthlyGrossRequired: number;
-	readonly annualGrossRequired: number;
-	readonly hourlyRequired: number;
-}
+// oxlint-disable-next-line unicorn/prefer-string-raw
+export const isZipCode = regex("^\\d{5}$");
+export type ZipCode = typeof isZipCode.infer;
 
-export interface HouseholdProfile {
-	readonly adults: number;
-	readonly children: number;
-	readonly foodPlanTier: FoodPlanTier;
-}
+export const isMonthlyCosts = type({
+	foodMonthly: "number",
+	healthMonthly: "number",
+	internetPhoneMonthly: "number",
+	rentMonthly: "number",
+	transportMonthly: "number",
+	utilitiesMonthly: "number",
+}).readonly();
+export type MonthlyCosts = typeof isMonthlyCosts.infer;
 
-export interface ZipRentRecord {
-	readonly zip: string;
-	readonly hudAreaCode: string;
-	readonly hudAreaName: string;
-	readonly twoBedroom: number;
-	readonly sourceYear: number;
-}
+export const isWageInput = isMonthlyCosts
+	.and({
+		annualWorkHours: "number",
+		retirementRate: "number",
+		savingsRate: "number",
+	})
+	.readonly();
+export type WageInput = typeof isWageInput.infer;
 
-export interface RentSnapshot {
-	readonly sourceYear: number;
-	readonly sourceUrl: string;
-	readonly generatedAt: string;
-	readonly recordCount: number;
-	readonly records: Array<ZipRentRecord>;
-}
+export const isWageResult = type({
+	annualGrossRequired: "number",
+	hourlyRequired: "number",
+	monthlyBudget: "number",
+	monthlyGrossRequired: "number",
+}).readonly();
+export type WageResult = typeof isWageResult.infer;
 
-export interface FoodSnapshot {
-	readonly sourceYear: number;
-	readonly sourceMonth: string;
-	readonly sourceUrl: string;
-	readonly notes: string;
-	readonly singleAdult: Record<FoodPlanTier, number>;
-	readonly adultPerPerson: Record<FoodPlanTier, number>;
-	readonly childPerPerson: Record<FoodPlanTier, number>;
-}
+export const isHouseholdProfile = type({
+	adults: "number % 1",
+	children: "number % 1",
+	foodPlanTier: isFoodPlanTier,
+}).readonly();
+export type HouseholdProfile = typeof isHouseholdProfile.infer;
 
-export interface VersionSnapshot {
-	readonly rentAsOf: string;
-	readonly foodAsOf: string;
-	readonly appBuiltAt: string;
-}
+export const isZipRentRecord = type({
+	hudAreaCode: "string",
+	hudAreaName: "string",
+	sourceYear: "number % 1",
+	twoBedroom: "number",
+	zip: isZipCode,
+}).readonly();
+export type ZipRentRecord = typeof isZipRentRecord.infer;
+
+export const isRentSnapshot = type({
+	generatedAt: "string",
+	recordCount: "number % 1",
+	records: isZipRentRecord.array().readonly(),
+	sourceUrl: "string",
+	sourceYear: "number % 1",
+}).readonly();
+export type RentSnapshot = typeof isRentSnapshot.infer;
+
+export const isFoodTierValues = type({
+	liberal: "number",
+	low: "number",
+	moderate: "number",
+	thrifty: "number",
+}).readonly();
+export type FoodTierValues = typeof isFoodTierValues.infer;
+
+export const isFoodSnapshot = type({
+	adultPerPerson: isFoodTierValues,
+	childPerPerson: isFoodTierValues,
+	notes: "string",
+	singleAdult: isFoodTierValues,
+	sourceMonth: "string",
+	sourceUrl: "string",
+	sourceYear: "number % 1",
+});
+export type FoodSnapshot = typeof isFoodSnapshot.infer;
+
+export const isVersionSnapshot = type({
+	appBuiltAt: "string",
+	foodAsOf: "string",
+	rentAsOf: "string",
+}).readonly();
+export type VersionSnapshot = typeof isVersionSnapshot.infer;

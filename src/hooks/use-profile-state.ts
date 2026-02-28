@@ -1,5 +1,5 @@
 import type { ChangeEventHandler, MouseEventHandler } from "react";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import type { FoodPlanTier, HouseholdProfile, TabId } from "../types";
 
 function isFoodPlanTier(value: string): value is FoodPlanTier {
@@ -12,14 +12,14 @@ function normalizeWholeNumber(rawValue: string, minimumValue: number): number {
 	return Math.max(minimumValue, Math.floor(parsedValue));
 }
 
-interface ProfileState {
+export interface ProfileState {
 	readonly activeTab: TabId;
-	readonly householdProfile: HouseholdProfile;
 	readonly handleAdultsChange: ChangeEventHandler<HTMLInputElement>;
 	readonly handleChildrenChange: ChangeEventHandler<HTMLInputElement>;
 	readonly handleFoodPlanTierChange: ChangeEventHandler<HTMLSelectElement>;
 	readonly handleHouseholdTabClick: MouseEventHandler<HTMLButtonElement>;
 	readonly handleSingleTabClick: MouseEventHandler<HTMLButtonElement>;
+	readonly householdProfile: HouseholdProfile;
 }
 
 export function useProfileState(): ProfileState {
@@ -30,29 +30,28 @@ export function useProfileState(): ProfileState {
 		foodPlanTier: "moderate",
 	});
 
-	const handleSingleTabClick = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+	function handleSingleTabClick(): void {
 		setActiveTab("single");
-	}, []);
-
-	const handleHouseholdTabClick = useCallback<MouseEventHandler<HTMLButtonElement>>(() => {
+	}
+	function handleHouseholdTabClick(): void {
 		setActiveTab("household");
-	}, []);
+	}
 
-	const handleAdultsChange = useCallback<ChangeEventHandler<HTMLInputElement>>((event) => {
-		const adults = normalizeWholeNumber(event.target.value, 1);
+	function handleAdultsChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
+		const adults = normalizeWholeNumber(target.value, 1);
 		setHouseholdProfile((previousProfile) => ({ ...previousProfile, adults }));
-	}, []);
+	}
 
-	const handleChildrenChange = useCallback<ChangeEventHandler<HTMLInputElement>>((event) => {
-		const children = normalizeWholeNumber(event.target.value, 0);
+	function handleChildrenChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
+		const children = normalizeWholeNumber(target.value, 0);
 		setHouseholdProfile((previousProfile) => ({ ...previousProfile, children }));
-	}, []);
+	}
 
-	const handleFoodPlanTierChange = useCallback<ChangeEventHandler<HTMLSelectElement>>((event) => {
-		const selectedFoodPlan = event.target.value;
+	function handleFoodPlanTierChange({ target }: React.ChangeEvent<HTMLSelectElement>): void {
+		const selectedFoodPlan = target.value;
 		if (!isFoodPlanTier(selectedFoodPlan)) return;
 		setHouseholdProfile((previousProfile) => ({ ...previousProfile, foodPlanTier: selectedFoodPlan }));
-	}, []);
+	}
 
 	return {
 		activeTab,

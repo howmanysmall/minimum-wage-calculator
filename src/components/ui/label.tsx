@@ -8,7 +8,7 @@ interface LabelProperties {
 	readonly htmlFor?: string;
 }
 
-export function Label({ children, className, htmlFor }: LabelProperties): ReactNode {
+export function Label({ children, className, htmlFor }: LabelProperties): React.ReactNode {
 	return (
 		<label className={cn("text-sm leading-none font-medium", className)} htmlFor={htmlFor}>
 			{children}

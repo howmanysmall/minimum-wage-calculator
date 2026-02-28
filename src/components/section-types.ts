@@ -3,20 +3,20 @@ import type { HouseholdProfile, MonthlyCosts, TabId } from "../types";
 
 export interface LocationSectionProperties {
 	readonly locationName: string;
-	readonly zip: string;
-	readonly zipStatus: string;
 	readonly onZipBlur: FocusEventHandler<HTMLInputElement>;
 	readonly onZipChange: ChangeEventHandler<HTMLInputElement>;
 	readonly onZipLookupClick: MouseEventHandler<HTMLButtonElement>;
+	readonly zip: string;
+	readonly zipStatus: string;
 }
 
 export interface AssumptionsSectionProperties {
 	readonly annualWorkHours: number;
-	readonly retirementRatePct: number;
-	readonly savingsRatePct: number;
-	readonly onWorkHoursChange: ChangeEventHandler<HTMLInputElement>;
 	readonly onRetirementRateChange: ChangeEventHandler<HTMLInputElement>;
 	readonly onSavingsRateChange: ChangeEventHandler<HTMLInputElement>;
+	readonly onWorkHoursChange: ChangeEventHandler<HTMLInputElement>;
+	readonly retirementRatePct: number;
+	readonly savingsRatePct: number;
 }
 
 export interface ProfileSectionProperties {

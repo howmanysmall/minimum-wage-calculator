@@ -44,7 +44,7 @@ export function Button({
 	size = "default",
 	type = "button",
 	variant = "default",
-}: ButtonProperties): ReactNode {
+}: ButtonProperties): React.ReactNode {
 	const resolvedButtonType = type === "submit" || type === "reset" ? type : "button";
 	const buttonClassName = cn(
 		"inline-flex items-center justify-center gap-2 rounded-lg border border-transparent font-medium whitespace-nowrap transition-[color,background-color,border-color,box-shadow,transform]",

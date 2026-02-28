@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { calculateRequiredWage } from "./lib/calc";
 import { DEFAULT_ANNUAL_WORK_HOURS } from "./lib/calculator-constants";
-import { getFoodBaselineForSingleAdult, getHouseholdFoodBaseline, lookupZipRent } from "./lib/data-lookup";
+import { getFoodBaselineForSingleAdult, getHouseholdFoodBaseline, lookupZipRentAsync } from "./lib/data-lookup";
 import type { MonthlyCosts } from "./types";
 
 function buildMonthlyCosts(rentMonthly: number, foodMonthly: number): MonthlyCosts {
@@ -15,18 +15,16 @@ function buildMonthlyCosts(rentMonthly: number, foodMonthly: number): MonthlyCos
 	};
 }
 
-function getKnownZipRent(): number {
-	const rentRecord = lookupZipRent("76437");
-	if (!rentRecord) {
-		throw new TypeError("Expected rent snapshot data for ZIP 76437.");
-	}
+async function getKnownZipRent(): Promise<number> {
+	const rentRecord = await lookupZipRentAsync("76437");
+	if (!rentRecord) throw new TypeError("Expected rent snapshot data for ZIP 76437.");
 
 	return rentRecord.twoBedroom;
 }
 
 describe("app integration", () => {
-	test("loads ZIP rent and calculates a positive wage output", () => {
-		const costs = buildMonthlyCosts(getKnownZipRent(), getFoodBaselineForSingleAdult("moderate"));
+	test("loads ZIP rent and calculates a positive wage output", async () => {
+		const costs = buildMonthlyCosts(await getKnownZipRent(), getFoodBaselineForSingleAdult("moderate"));
 		const result = calculateRequiredWage({
 			...costs,
 			annualWorkHours: DEFAULT_ANNUAL_WORK_HOURS,
@@ -51,8 +49,8 @@ describe("app integration", () => {
 		expect(householdFood).toBeGreaterThan(singleAdultFood);
 	});
 
-	test("higher savings and retirement rates require a higher hourly wage", () => {
-		const costs = buildMonthlyCosts(getKnownZipRent(), getFoodBaselineForSingleAdult("moderate"));
+	test("higher savings and retirement rates require a higher hourly wage", async () => {
+		const costs = buildMonthlyCosts(await getKnownZipRent(), getFoodBaselineForSingleAdult("moderate"));
 		const baseRatesResult = calculateRequiredWage({
 			...costs,
 			annualWorkHours: DEFAULT_ANNUAL_WORK_HOURS,

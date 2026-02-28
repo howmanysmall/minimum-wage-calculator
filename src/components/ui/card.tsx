@@ -7,6 +7,6 @@ interface CardProperties {
 	readonly className?: string;
 }
 
-export function Card({ children, className }: CardProperties): ReactNode {
+export function Card({ children, className }: CardProperties): React.ReactNode {
 	return <div className={cn("surface-panel rounded-2xl text-card-foreground", className)}>{children}</div>;
 }

@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 
 import { Command } from "@jsr/cliffy__command";
+import { write } from "bun";
 import type { Cell, Worksheet } from "exceljs";
 import { Workbook } from "exceljs";
 
@@ -63,11 +64,9 @@ function parseHudRecords(sheet: Worksheet, sourceYear: number): Array<HudRecord>
 	return records;
 }
 
-async function parseHudSafmrAsync(inputXlsx: Bun.BunFile, sourceYear: number, sourceUrl: string): Promise<HudSnapshot> {
-	if (inputXlsx.name === undefined) throw new Error("Input file must have a name.");
-
+async function parseHudSafmrAsync(inputXlsxPath: string, sourceYear: number, sourceUrl: string): Promise<HudSnapshot> {
 	const workbook = new Workbook();
-	await workbook.xlsx.readFile(inputXlsx.name);
+	await workbook.xlsx.readFile(inputXlsxPath);
 
 	const [sheet] = workbook.worksheets;
 	if (sheet === undefined) throw new Error("No sheets found in HUD workbook.");
@@ -83,13 +82,13 @@ async function parseHudSafmrAsync(inputXlsx: Bun.BunFile, sourceYear: number, so
 }
 
 export async function buildHudSnapshotAsync(
-	input: Bun.BunFile,
+	inputPath: string,
 	output: string,
 	year: number,
 	sourceUrl: string,
 ): Promise<void> {
-	const payload = await parseHudSafmrAsync(input, year, sourceUrl);
-	await Bun.write(output, JSON.stringify(payload), { createPath: true });
+	const payload = await parseHudSafmrAsync(inputPath, year, sourceUrl);
+	await write(output, JSON.stringify(payload), { createPath: true });
 	console.log(`Wrote ${payload.recordCount} ZIP rent records -> ${output}`);
 }
 
@@ -103,7 +102,7 @@ if (import.meta.main) {
 		.option("--year <year:integer>", "HUD SAFMR source year", { required: true })
 		.option("--source-url <url:string>", "HUD source URL", { required: true })
 		.action(async ({ input, output, sourceUrl, year }) => {
-			await buildHudSnapshotAsync(Bun.file(input), output, year, sourceUrl);
+			await buildHudSnapshotAsync(input, output, year, sourceUrl);
 		})
 		.parse(Bun.argv.slice(2));
 }
