@@ -11,16 +11,16 @@ import type {
 
 interface CalculatorLayoutProperties {
 	readonly annualWorkHours: number;
+	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
 	readonly dataVersion: VersionSnapshot;
+	readonly locationSectionProperties: LocationSectionProperties;
+	readonly monthlyCostsSectionProperties: MonthlyCostsSectionProperties;
+	readonly onFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
+	readonly profileSectionProperties: ProfileSectionProperties;
 	readonly result?: WageResult | undefined;
 	readonly resultError: string;
 	readonly retirementRatePct: number;
 	readonly savingsRatePct: number;
-	readonly locationSectionProperties: LocationSectionProperties;
-	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
-	readonly profileSectionProperties: ProfileSectionProperties;
-	readonly monthlyCostsSectionProperties: MonthlyCostsSectionProperties;
-	readonly onFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
 }
 
 export function CalculatorLayout({

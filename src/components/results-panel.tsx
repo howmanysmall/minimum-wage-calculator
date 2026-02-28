@@ -6,10 +6,10 @@ import { ResultsHintItem } from "./results-hint-item";
 import { Card } from "./ui/card";
 
 interface ResultsPanelProperties {
-	readonly result: WageResult | undefined;
-	readonly savingsRatePercent: number;
-	readonly retirementRatePercent: number;
 	readonly annualWorkHours: number;
+	readonly result: WageResult | undefined;
+	readonly retirementRatePercent: number;
+	readonly savingsRatePercent: number;
 }
 
 export function ResultsPanel({

@@ -14,12 +14,12 @@ function normalizeWholeNumber(rawValue: string, minimumValue: number): number {
 
 export interface ProfileState {
 	readonly activeTab: TabId;
-	readonly householdProfile: HouseholdProfile;
 	readonly handleAdultsChange: ChangeEventHandler<HTMLInputElement>;
 	readonly handleChildrenChange: ChangeEventHandler<HTMLInputElement>;
 	readonly handleFoodPlanTierChange: ChangeEventHandler<HTMLSelectElement>;
 	readonly handleHouseholdTabClick: MouseEventHandler<HTMLButtonElement>;
 	readonly handleSingleTabClick: MouseEventHandler<HTMLButtonElement>;
+	readonly householdProfile: HouseholdProfile;
 }
 
 export function useProfileState(): ProfileState {

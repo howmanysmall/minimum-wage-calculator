@@ -5,11 +5,11 @@ import { Label } from "./ui/label";
 
 interface CostInputProperties {
 	readonly costKey: keyof MonthlyCosts;
-	readonly label: string;
 	readonly hint: string;
+	readonly label: string;
+	readonly onCostInputChange: React.ChangeEventHandler<HTMLInputElement>;
 	readonly step?: string | undefined;
 	readonly value: number;
-	readonly onCostInputChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export function CostInput({

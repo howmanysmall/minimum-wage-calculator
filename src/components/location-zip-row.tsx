@@ -3,10 +3,10 @@ import { Button } from "./ui/button";
 import { ZipInputControl } from "./zip-input-control";
 
 interface LocationZipRowProperties {
-	readonly zip: string;
 	readonly onZipBlur: React.FocusEventHandler<HTMLInputElement>;
 	readonly onZipChange: React.ChangeEventHandler<HTMLInputElement>;
 	readonly onZipLookupClick: React.MouseEventHandler<HTMLButtonElement>;
+	readonly zip: string;
 }
 
 export function LocationZipRow({

@@ -20,11 +20,11 @@ function normalizeHours(rawValue: string): number {
 
 export interface AssumptionsState {
 	readonly annualWorkHours: number;
-	readonly retirementRatePercent: number;
-	readonly savingsRatePercent: number;
 	readonly handleRetirementRateChange: ChangeEventHandler<HTMLInputElement>;
 	readonly handleSavingsRateChange: ChangeEventHandler<HTMLInputElement>;
 	readonly handleWorkHoursChange: ChangeEventHandler<HTMLInputElement>;
+	readonly retirementRatePercent: number;
+	readonly savingsRatePercent: number;
 }
 
 export function useAssumptionsState(): AssumptionsState {

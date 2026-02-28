@@ -11,13 +11,13 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
 interface CalculatorFormProperties {
-	readonly dataVersion: VersionSnapshot;
-	readonly resultError: string;
-	readonly onFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
-	readonly locationSectionProperties: LocationSectionProperties;
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
-	readonly profileSectionProperties: ProfileSectionProperties;
+	readonly dataVersion: VersionSnapshot;
+	readonly locationSectionProperties: LocationSectionProperties;
 	readonly monthlyCostsSectionProperties: MonthlyCostsSectionProperties;
+	readonly onFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
+	readonly profileSectionProperties: ProfileSectionProperties;
+	readonly resultError: string;
 }
 
 export function CalculatorForm({

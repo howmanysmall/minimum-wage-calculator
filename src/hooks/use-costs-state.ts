@@ -24,11 +24,11 @@ function normalizeCost(rawValue: string): number {
 }
 
 export interface CostsState {
+	readonly applyRentToAllProfiles: (rentMonthly: number) => void;
 	readonly currentCosts: MonthlyCosts;
-	readonly householdFoodRecommendation: number;
 	readonly handleApplyHouseholdFoodRecommendation: MouseEventHandler<HTMLButtonElement>;
 	readonly handleCostInputChange: ChangeEventHandler<HTMLInputElement>;
-	readonly applyRentToAllProfiles: (rentMonthly: number) => void;
+	readonly householdFoodRecommendation: number;
 }
 
 export function useCostsState(activeTab: TabId, householdProfile: HouseholdProfile): CostsState {

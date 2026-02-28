@@ -5,11 +5,11 @@ import { Label } from "./ui/label";
 interface NumericInputProperties {
 	readonly inputId: string;
 	readonly label: string;
-	readonly min: number;
 	readonly max?: number;
+	readonly min: number;
+	readonly onChange: React.ChangeEventHandler<HTMLInputElement>;
 	readonly step: string;
 	readonly value: number;
-	readonly onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export function NumericInput({

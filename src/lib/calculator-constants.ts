@@ -1,9 +1,9 @@
 import type { MonthlyCosts } from "../types";
 
 interface CostField {
+	readonly hint: string;
 	readonly key: keyof MonthlyCosts;
 	readonly label: string;
-	readonly hint: string;
 	readonly step?: string;
 }
 

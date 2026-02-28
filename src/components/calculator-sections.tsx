@@ -11,10 +11,10 @@ import type {
 } from "./section-types";
 
 interface CalculatorSectionsProperties {
-	readonly locationSectionProperties: LocationSectionProperties;
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
-	readonly profileSectionProperties: ProfileSectionProperties;
+	readonly locationSectionProperties: LocationSectionProperties;
 	readonly monthlyCostsSectionProperties: MonthlyCostsSectionProperties;
+	readonly profileSectionProperties: ProfileSectionProperties;
 }
 
 interface LocationHandlerProperties {

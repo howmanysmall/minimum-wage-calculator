@@ -12,9 +12,9 @@ interface CalculationInput {
 }
 
 interface ResultState {
+	readonly handleFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
 	readonly result: WageResult | undefined;
 	readonly resultError: string;
-	readonly handleFormSubmit: React.EventHandler<React.SubmitEvent<HTMLFormElement>>;
 }
 
 export function useResultState({
