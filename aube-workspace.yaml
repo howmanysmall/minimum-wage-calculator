@@ -1,0 +1,10 @@
+allowBuilds:
+  msw: false
+
+# overrides:
+
+patchedDependencies:
+  package-manager-detector@1.6.0: patches/package-manager-detector@1.6.0.patch
+
+trustPolicyExclude:
+  - skills
