@@ -141,7 +141,7 @@ function isStaticJsxChild(
 	additionalComponents: ReadonlySet<string>,
 	staticOptions: StaticExpressionOptions,
 ): boolean {
-	if (child.type === "JSXText") return child.value.trim() === "";
+	if (child.type === "JSXText") return true;
 	if (child.type === "JSXElement" || child.type === "JSXFragment") {
 		return isStaticJsxNode(context, child, seen, additionalComponents, staticOptions);
 	}
