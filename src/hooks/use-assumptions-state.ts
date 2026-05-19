@@ -1,21 +1,20 @@
-import type { ChangeEventHandler } from "react";
 import React, { useState } from "react";
 import {
 	DEFAULT_ANNUAL_WORK_HOURS,
 	DEFAULT_RETIREMENT_RATE_PERCENT,
 	DEFAULT_SAVINGS_RATE_PERCENT,
-} from "../lib/calculator-constants";
+} from "@constants/calculator-constants";
+
+import type { ChangeEventHandler } from "react";
 
 function normalizePercent(rawValue: string): number {
 	const parsedValue = Number(rawValue);
-	if (!Number.isFinite(parsedValue)) return 0;
-	return Math.max(0, Math.min(100, parsedValue));
+	return Number.isFinite(parsedValue) ? Math.max(0, Math.min(100, parsedValue)) : 0;
 }
 
 function normalizeHours(rawValue: string): number {
 	const parsedValue = Number(rawValue);
-	if (!Number.isFinite(parsedValue)) return 1;
-	return Math.max(1, parsedValue);
+	return Number.isFinite(parsedValue) ? Math.max(1, parsedValue) : 1;
 }
 
 export interface AssumptionsState {

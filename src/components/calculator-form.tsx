@@ -1,16 +1,19 @@
 import React from "react";
-import type { VersionSnapshot } from "../types";
+
 import { CalculatorSections } from "./calculator-sections";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
+
+import type { VersionSnapshot } from "@project-types";
+
 import type {
 	AssumptionsSectionProperties,
 	LocationSectionProperties,
 	MonthlyCostsSectionProperties,
 	ProfileSectionProperties,
 } from "./section-types";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
 
-interface CalculatorFormProperties {
+export interface CalculatorFormProperties {
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
 	readonly dataVersion: VersionSnapshot;
 	readonly locationSectionProperties: LocationSectionProperties;
@@ -49,11 +52,12 @@ export function CalculatorForm({
 					<p
 						aria-live="polite"
 						className="border-destructive/30 bg-destructive/10 text-destructive rounded-xl border px-3 py-2 text-sm font-medium"
-						role="alert"
-					>
+						role="alert">
 						{resultError}
 					</p>
-				) : undefined}
+				) : (
+					""
+				)}
 				<Button className="h-11 w-full rounded-xl text-sm font-semibold" size="lg" type="submit">
 					Calculate Required Wage
 				</Button>

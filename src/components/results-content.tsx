@@ -1,12 +1,14 @@
 import React from "react";
-import { formatCurrency, formatPercentFromDecimal, roundToTwo } from "../lib/format";
-import type { WageResult } from "../types";
+import { formatCurrency, formatPercentFromDecimal, roundToTwo } from "@utilities/format-utilities";
+
 import { FormulaDetails } from "./formula-details";
 import { ResultsGrid } from "./results-grid";
 import { Badge } from "./ui/badge";
 import { Card } from "./ui/card";
 
-interface ResultsContentProperties {
+import type { WageResult } from "@project-types";
+
+export interface ResultsContentProperties {
 	readonly annualWorkHours: number;
 	readonly result: WageResult;
 	readonly retirementRatePercent: number;

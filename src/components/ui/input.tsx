@@ -1,8 +1,9 @@
-import type { ChangeEventHandler, FocusEventHandler, HTMLAttributes, HTMLInputTypeAttribute } from "react";
 import React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@utilities/component-utilities";
 
-interface InputProperties {
+import type { ChangeEventHandler, FocusEventHandler, HTMLAttributes, HTMLInputTypeAttribute } from "react";
+
+export interface InputProperties {
 	readonly autoComplete?: string;
 	readonly className?: string;
 	readonly disabled?: boolean;
@@ -42,6 +43,7 @@ export function Input({
 	value,
 }: InputProperties): React.ReactNode {
 	return (
+		// oxlint-disable-next-line jsx-a11y/control-has-associated-label
 		<input
 			autoComplete={autoComplete}
 			className={cn(

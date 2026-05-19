@@ -1,6 +1,6 @@
 import React from "react";
 
-interface FormulaDetailsProperties {
+export interface FormulaDetailsProperties {
 	readonly budgetLine: string;
 	readonly wageLine: string;
 }

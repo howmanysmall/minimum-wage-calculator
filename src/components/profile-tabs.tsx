@@ -1,8 +1,10 @@
 import React from "react";
-import type { TabId } from "../types";
+
 import { Button } from "./ui/button";
 
-interface ProfileTabsProperties {
+import type { TabId } from "@project-types";
+
+export interface ProfileTabsProperties {
 	readonly activeTab: TabId;
 	readonly onHouseholdTabClick: React.MouseEventHandler<HTMLButtonElement>;
 	readonly onSingleTabClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -19,16 +21,14 @@ export function ProfileTabs({
 				className="h-10 rounded-lg font-semibold"
 				onClick={onSingleTabClick}
 				type="button"
-				variant={activeTab === "single" ? "secondary" : "ghost"}
-			>
+				variant={activeTab === "single" ? "secondary" : "ghost"}>
 				Single Adult
 			</Button>
 			<Button
 				className="h-10 rounded-lg font-semibold"
 				onClick={onHouseholdTabClick}
 				type="button"
-				variant={activeTab === "household" ? "secondary" : "ghost"}
-			>
+				variant={activeTab === "household" ? "secondary" : "ghost"}>
 				Household
 			</Button>
 		</div>

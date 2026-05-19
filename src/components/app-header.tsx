@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Badge } from "./ui/badge";
 
 export function AppHeader(): React.ReactNode {
@@ -6,8 +7,7 @@ export function AppHeader(): React.ReactNode {
 		<header className="surface-panel-strong rise-in rounded-3xl px-5 py-6 sm:px-8 sm:py-9">
 			<Badge
 				className="border-border/80 bg-background/46 rounded-full px-3 py-1 font-semibold tracking-[0.055em] uppercase"
-				variant="outline"
-			>
+				variant="outline">
 				Regional Cost Model
 			</Badge>
 			<h1 className="text-foreground mt-5 max-w-4xl font-serif text-4xl leading-tight font-semibold tracking-tight sm:text-5xl lg:text-[3.35rem]">

@@ -1,6 +1,8 @@
 import React from "react";
-import { cn } from "../lib/utils";
+import { cn } from "@utilities/component-utilities";
+
 import { LocationZipRow } from "./location-zip-row";
+
 import type { LocationSectionProperties } from "./section-types";
 
 export function LocationSection({
@@ -25,18 +27,21 @@ export function LocationSection({
 				<p className="border-primary/28 bg-primary/12 text-foreground mt-3 rounded-lg border px-3 py-2 text-sm font-medium">
 					Area: {locationName}
 				</p>
-			) : undefined}
+			) : (
+				""
+			)}
 			{zipStatus ? (
 				<p
 					aria-live="polite"
 					className={cn(
 						"mt-2 rounded-lg bg-muted/56 px-3 py-2 text-sm",
 						!locationName && "text-muted-foreground",
-					)}
-				>
+					)}>
 					{zipStatus}
 				</p>
-			) : undefined}
+			) : (
+				""
+			)}
 		</section>
 	);
 }

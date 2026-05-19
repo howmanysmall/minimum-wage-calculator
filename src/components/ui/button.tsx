@@ -1,11 +1,12 @@
-import type { MouseEventHandler, ReactNode } from "react";
 import React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@utilities/component-utilities";
+
+import type { MouseEventHandler, ReactNode } from "react";
 
 type ButtonVariant = "default" | "secondary" | "outline" | "ghost";
 type ButtonSize = "default" | "lg";
 
-interface ButtonProperties {
+export interface ButtonProperties {
 	readonly children: ReactNode;
 	readonly className?: string;
 	readonly disabled?: boolean;

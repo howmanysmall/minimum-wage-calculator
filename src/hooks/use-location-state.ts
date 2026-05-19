@@ -1,7 +1,13 @@
-import type { ChangeEventHandler, FocusEventHandler, MouseEventHandler } from "react";
 import { useRef, useState } from "react";
-import { isZipFormatValid, lookupZipRentAsync, normalizeZip, preloadZipRentSnapshotAsync } from "../lib/data-lookup";
-import type { ZipRentRecord } from "../types";
+import {
+	isZipFormatValid,
+	lookupZipRentAsync,
+	normalizeZip,
+	preloadZipRentSnapshotAsync,
+} from "@utilities/data-lookup-utilities";
+
+import type { ZipRentRecord } from "@project-types";
+import type { ChangeEventHandler, FocusEventHandler, MouseEventHandler } from "react";
 
 async function lookupAndApplyRentAsync(
 	zip: string,
@@ -68,12 +74,10 @@ export function useLocationState(applyRentToAllProfiles: (rentMonthly: number) =
 	const lookupRequestIdRef = useRef(0);
 
 	function startBackgroundPreload(): void {
-		// oxlint-disable-next-line no-void
 		void preloadZipRentSnapshotSafelyAsync();
 	}
 
 	function startBackgroundLookup(lookupRequestId: number): void {
-		// oxlint-disable-next-line no-void
 		void lookupAndApplyRentAsync(
 			zip,
 			setZip,
@@ -94,9 +98,7 @@ export function useLocationState(applyRentToAllProfiles: (rentMonthly: number) =
 	function handleZipChange({ target }: React.ChangeEvent<HTMLInputElement>): void {
 		const normalizedZip = normalizeZip(target.value);
 		setZip(normalizedZip);
-		if (normalizedZip.length === 5) {
-			startBackgroundPreload();
-		}
+		if (normalizedZip.length === 5) startBackgroundPreload();
 	}
 
 	function handleZipBlur(): void {

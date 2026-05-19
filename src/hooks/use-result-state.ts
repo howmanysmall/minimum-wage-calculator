@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { calculateRequiredWage } from "../lib/calc";
-import { isZipFormatValid, normalizeZip } from "../lib/data-lookup";
-import type { MonthlyCosts, WageResult } from "../types";
+import { calculateRequiredWage } from "@functions/calculate-require-wage";
+import { isZipFormatValid, normalizeZip } from "@utilities/data-lookup-utilities";
+
+import type { MonthlyCosts, WageResult } from "@project-types";
 
 interface CalculationInput {
 	readonly annualWorkHours: number;
@@ -39,7 +40,7 @@ export function useResultState({
 		try {
 			const computedResult = calculateRequiredWage({
 				...currentCosts,
-				annualWorkHours: annualWorkHours,
+				annualWorkHours,
 				retirementRate: retirementRatePercent / 100,
 				savingsRate: savingsRatePercent / 100,
 			});

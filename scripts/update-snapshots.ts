@@ -1,11 +1,12 @@
-#!/usr/bin/env bun
+#!/usr/bin/env jiti
 
 import { mkdir, writeFile } from "node:fs/promises";
-import { dirname, join, resolve } from "node:path";
+import { join, resolve } from "node:path";
+
 import { buildHudSnapshotAsync } from "./build-hud-snapshot";
 import { buildUsdaSnapshotAsync } from "./build-usda-snapshot";
 
-const ROOT_DIR = resolve(dirname(import.meta.path), "..");
+const ROOT_DIR = resolve(import.meta.dirname, "..");
 const HUD_YEAR = 2026;
 const HUD_URL = "https://www.huduser.gov/portal/datasets/fmr/fmr2026/fy2026_safmrs.xlsx";
 const USDA_URL = "https://www.fns.usda.gov/research/cnpp/usda-food-plans/cost-food-monthly-reports";

@@ -1,18 +1,11 @@
+import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-const viteConfig = defineConfig({
+const configuration = defineConfig({
 	base: "./",
-	plugins: [
-		react({
-			babel: {
-				plugins: [["babel-plugin-react-compiler"]],
-			},
-		}),
-		tailwindcss(),
-	],
+	plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss()],
 });
 
-// oxlint-disable-next-line import/no-default-export
-export default viteConfig;
+export default configuration;

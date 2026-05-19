@@ -1,22 +1,23 @@
 import React from "react";
-import { AppHeader } from "./components/app-header";
-import { CalculatorLayout } from "./components/calculator-layout";
+import { AppHeader } from "@components/app-header";
+import { CalculatorLayout } from "@components/calculator-layout";
+import { useAssumptionsState } from "@hooks/use-assumptions-state";
+import { useCostsState } from "@hooks/use-costs-state";
+import { useLocationState } from "@hooks/use-location-state";
+import { useProfileState } from "@hooks/use-profile-state";
+import { useResultState } from "@hooks/use-result-state";
+import { getDataVersion } from "@utilities/data-lookup-utilities";
+
 import type {
 	AssumptionsSectionProperties,
 	LocationSectionProperties,
 	MonthlyCostsSectionProperties,
 	ProfileSectionProperties,
-} from "./components/section-types";
-import type { AssumptionsState } from "./hooks/use-assumptions-state";
-import { useAssumptionsState } from "./hooks/use-assumptions-state";
-import type { CostsState } from "./hooks/use-costs-state";
-import { useCostsState } from "./hooks/use-costs-state";
-import type { LocationState } from "./hooks/use-location-state";
-import { useLocationState } from "./hooks/use-location-state";
-import type { ProfileState } from "./hooks/use-profile-state";
-import { useProfileState } from "./hooks/use-profile-state";
-import { useResultState } from "./hooks/use-result-state";
-import { getDataVersion } from "./lib/data-lookup";
+} from "@components/section-types";
+import type { AssumptionsState } from "@hooks/use-assumptions-state";
+import type { CostsState } from "@hooks/use-costs-state";
+import type { LocationState } from "@hooks/use-location-state";
+import type { ProfileState } from "@hooks/use-profile-state";
 
 function createAssumptionsSectionProperties(assumptionsState: AssumptionsState): AssumptionsSectionProperties {
 	return {
@@ -81,15 +82,10 @@ export function App(): React.ReactNode {
 
 	return (
 		<div className="relative min-h-screen overflow-x-hidden px-4 py-6 sm:px-6 lg:px-10">
-			<div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-				<div className="bg-primary/16 absolute -top-44 left-1/5 h-120 w-120 rounded-full blur-[140px]" />
-				<div className="absolute -top-8 -right-40 h-112 w-md rounded-full bg-slate-400/10 blur-[136px]" />
-				<div className="absolute -bottom-44 left-1/2 h-96 w-[24rem] -translate-x-1/2 rounded-full bg-slate-600/10 blur-[140px]" />
-			</div>
+			{DECORATIVE_DIV}
 			<a
 				className="bg-primary text-primary-foreground sr-only rounded-lg px-3 py-2 text-sm font-semibold focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
-				href="#calculator-main"
-			>
+				href="#calculator-main">
 				Skip to calculator
 			</a>
 			<div className="mx-auto flex w-full max-w-7xl flex-col gap-7 pb-10 lg:gap-8">
@@ -111,3 +107,11 @@ export function App(): React.ReactNode {
 		</div>
 	);
 }
+
+const DECORATIVE_DIV = (
+	<div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+		<div className="bg-primary/16 absolute -top-44 left-1/5 h-120 w-120 rounded-full blur-[140px]" />
+		<div className="absolute -top-8 -right-40 h-112 w-md rounded-full bg-slate-400/10 blur-[136px]" />
+		<div className="absolute -bottom-44 left-1/2 h-96 w-[24rem] -translate-x-1/2 rounded-full bg-slate-600/10 blur-[140px]" />
+	</div>
+);

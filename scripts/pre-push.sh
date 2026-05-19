@@ -4,8 +4,7 @@
 
 set -euo pipefail
 
-bun run biome:ci
-bun add -d oxlint-tsgolint@latest
-bun run oxc .
-bun run type-check
-bun run build
+nr biome ci
+nr oxc .
+nr type-check
+nr build

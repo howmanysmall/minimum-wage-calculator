@@ -1,8 +1,9 @@
-import type { ChangeEventHandler, MouseEventHandler } from "react";
 import { useState } from "react";
-import { BASE_MONTHLY_COSTS } from "../lib/calculator-constants";
-import { getFoodBaselineForSingleAdult, getHouseholdFoodBaseline } from "../lib/data-lookup";
-import type { HouseholdProfile, MonthlyCosts, TabId } from "../types";
+import { BASE_MONTHLY_COSTS } from "@constants/calculator-constants";
+import { getFoodBaselineForSingleAdult, getHouseholdFoodBaseline } from "@utilities/data-lookup-utilities";
+
+import type { HouseholdProfile, MonthlyCosts, TabId } from "@project-types";
+import type { ChangeEventHandler, MouseEventHandler } from "react";
 
 const MONTHLY_COST_KEY_RECORD: Record<keyof MonthlyCosts, true> = {
 	foodMonthly: true,
@@ -19,8 +20,7 @@ function isMonthlyCostKey(value: string): value is keyof MonthlyCosts {
 
 function normalizeCost(rawValue: string): number {
 	const parsedValue = Number(rawValue);
-	if (!Number.isFinite(parsedValue)) return 0;
-	return Math.max(0, parsedValue);
+	return Number.isFinite(parsedValue) ? Math.max(0, parsedValue) : 0;
 }
 
 export interface CostsState {

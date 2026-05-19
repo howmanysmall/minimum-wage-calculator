@@ -1,6 +1,7 @@
-import type { ChangeEventHandler, MouseEventHandler } from "react";
 import { useState } from "react";
-import type { FoodPlanTier, HouseholdProfile, TabId } from "../types";
+
+import type { FoodPlanTier, HouseholdProfile, TabId } from "@project-types";
+import type { ChangeEventHandler, MouseEventHandler } from "react";
 
 function isFoodPlanTier(value: string): value is FoodPlanTier {
 	return value === "thrifty" || value === "low" || value === "moderate" || value === "liberal";

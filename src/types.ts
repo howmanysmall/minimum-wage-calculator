@@ -7,7 +7,7 @@ export const isTabId = type('"single" | "household"');
 export type TabId = typeof isTabId.infer;
 
 // oxlint-disable-next-line unicorn/prefer-string-raw
-export const isZipCode = regex("^\\d{5}$");
+export const isZipCode = regex("^\\d{5}$", "u");
 export type ZipCode = typeof isZipCode.infer;
 
 export const isMonthlyCosts = type({

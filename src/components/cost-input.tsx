@@ -1,9 +1,11 @@
 import React from "react";
-import type { MonthlyCosts } from "../types";
+
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-interface CostInputProperties {
+import type { MonthlyCosts } from "@project-types";
+
+export interface CostInputProperties {
 	readonly costKey: keyof MonthlyCosts;
 	readonly hint: string;
 	readonly label: string;

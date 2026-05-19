@@ -1,8 +1,8 @@
 import type { UserConfig } from "@commitlint/types";
 
-const userConfiguration: UserConfig = {
+const configuration: UserConfig = {
 	extends: ["@commitlint/config-conventional"],
+	rules: {},
 };
 
-// oxlint-disable-next-line import/no-default-export
-export default userConfiguration;
+export default configuration;

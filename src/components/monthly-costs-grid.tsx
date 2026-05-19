@@ -1,10 +1,12 @@
-import type { ChangeEventHandler } from "react";
 import React from "react";
-import { COST_FIELDS } from "../lib/calculator-constants";
-import type { MonthlyCosts } from "../types";
+import { COST_FIELDS } from "@constants/calculator-constants";
+
 import { CostInput } from "./cost-input";
 
-interface MonthlyCostsGridProperties {
+import type { MonthlyCosts } from "@project-types";
+import type { ChangeEventHandler } from "react";
+
+export interface MonthlyCostsGridProperties {
 	readonly costs: MonthlyCosts;
 	readonly onCostInputChange: ChangeEventHandler<HTMLInputElement>;
 }

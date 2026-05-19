@@ -1,11 +1,13 @@
 import React from "react";
-import type { WageResult } from "../types";
+
 import { ResultCard } from "./result-card";
 import { ResultsContent } from "./results-content";
 import { ResultsHintItem } from "./results-hint-item";
 import { Card } from "./ui/card";
 
-interface ResultsPanelProperties {
+import type { WageResult } from "@project-types";
+
+export interface ResultsPanelProperties {
 	readonly annualWorkHours: number;
 	readonly result: WageResult | undefined;
 	readonly retirementRatePercent: number;

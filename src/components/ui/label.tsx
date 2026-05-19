@@ -1,8 +1,9 @@
-import type { ReactNode } from "react";
 import React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@utilities/component-utilities";
 
-interface LabelProperties {
+import type { ReactNode } from "react";
+
+export interface LabelProperties {
 	readonly children: ReactNode;
 	readonly className?: string;
 	readonly htmlFor?: string;
