@@ -386,7 +386,13 @@
 							"lefthook.yaml",
 							".lefthook.yaml"
 						],
-						"https://www.schemastore.org/dependabot-2.0.json": ".github/dependabot.*"
+						"https://www.schemastore.org/dependabot-2.0.json": ".github/dependabot.*",
+						"https://www.schemastore.org/pnpm-workspace.json": [
+							"aube-workspace.yaml",
+							"aube-workspace.yml",
+							"pnpm-workspace.yaml",
+							"pnpm-workspace.yml"
+						]
 					}
 				}
 			}

@@ -1,6 +1,9 @@
 allowBuilds:
   msw: false
 
+enableGlobalVirtualStore: true
+minimumReleaseAge: 10080
+
 # overrides:
 
 patchedDependencies:
