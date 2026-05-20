@@ -9,7 +9,7 @@ inputs:
   mise-version:
     description: mise version to install
     required: false
-    default: latest
+    default: 2026.5.12
 
 runs:
   using: composite
@@ -19,7 +19,7 @@ runs:
       with:
         cache: false
         install: true
-        install_args: node aube
+        install_args: node aube lefthook
         version: ${{ inputs.mise-version }}
 
     - name: Restore Aube cache
