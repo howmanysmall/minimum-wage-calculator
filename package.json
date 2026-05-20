@@ -5,7 +5,6 @@
 	"type": "module",
 	"scripts": {
 		"biome": "biome",
-		"biome:ci": "biome ci",
 		"build": "nr type-check && vite build",
 		"build:oxc": "jiti ./scripts/build-small-rules.ts",
 		"dev": "vite",

@@ -1,4 +1,10 @@
-# Lefthook configuration
+min_version: 2.0.0
+
+colors: true
+
+output:
+  - execution
+  - summary
 
 commit-msg:
   commands:
@@ -21,9 +27,13 @@ pre-commit:
     - name: lint+format js/ts
       glob: "*.{js,jsx,ts,tsx}"
       run: |
-        nr oxc --fix {staged_files}
-        nr biome check --write --no-errors-on-unmatched {staged_files}
+        nr oxc -- --no-error-on-unmatched-pattern --fix {staged_files}
         nr format {staged_files}
+      stage_fixed: true
+
+    - name: format yaml
+      glob: "*.{yaml,yml}"
+      run: nr format {staged_files}
       stage_fixed: true
 
     - name: format json5/mdx
@@ -48,4 +58,8 @@ pre-commit:
 pre-push:
   commands:
     ci-checks:
-      run: bash ./scripts/pre-push.sh
+      run: |
+        nr biome ci
+        nr oxc .
+        nr test
+        nr build

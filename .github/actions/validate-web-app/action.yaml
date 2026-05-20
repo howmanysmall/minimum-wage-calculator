@@ -9,7 +9,7 @@ inputs:
   lint-command:
     description: Lint command to run
     required: false
-    default: nr lint
+    default: aube run lint
   run-tests:
     description: Run tests
     required: false
@@ -21,7 +21,7 @@ runs:
     - name: Biome CI
       if: inputs.check-biome == 'true'
       shell: bash
-      run: nr biome ci
+      run: aube run biome ci
 
     - name: Lint
       shell: bash
@@ -30,11 +30,11 @@ runs:
     - name: Run tests
       if: inputs.run-tests == 'true'
       shell: bash
-      run: nr test
+      run: aube run test
 
     - name: Build
       shell: bash
-      run: nr build
+      run: aube run build
 
     - name: Assert build artifacts exist
       shell: bash

@@ -32,7 +32,7 @@ jobs:
         uses: ./.github/actions/validate-web-app
         with:
           check-biome: "true"
-          lint-command: nr oxc .
+          lint-command: aube run oxc .
           run-tests: "true"
 
       - name: Upload Pages artifact
