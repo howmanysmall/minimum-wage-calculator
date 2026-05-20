@@ -379,14 +379,14 @@
 					"schemas": {
 						"./schemas/kubernetes.yaml": "k8s/**/*.yaml",
 						"~/global-schemas/docker-compose.yaml": "docker-compose*.yml",
-						"https://json.schemastore.org/dependabot-v2.json": ".github/dependabot.*",
 						"https://json.schemastore.org/github-workflow.json": ".github/workflows/*",
 						"https://raw.githubusercontent.com/evilmartians/lefthook/master/schema.json": [
 							"lefthook.yml",
 							".lefthook.yml",
 							"lefthook.yaml",
 							".lefthook.yaml"
-						]
+						],
+						"https://www.schemastore.org/dependabot-2.0.json": ".github/dependabot.*"
 					}
 				}
 			}
