@@ -354,6 +354,11 @@
 			"enabled": true,
 			"type": "local",
 		},
+		"shadcn": {
+			"command": ["aubx", "shadcn@latest", "mcp"],
+			"enabled": true,
+			"type": "local",
+		},
 	},
 	"permission": {
 		"bash": {
