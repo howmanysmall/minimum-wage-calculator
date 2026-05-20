@@ -170,8 +170,12 @@ const preferConstantDispatch = defineRule({
 				if (firstArgument === undefined || firstArgument.type === "SpreadElement") return;
 
 				const actionArgument = unwrapExpression(firstArgument);
-				if (actionArgument.type !== "ObjectExpression" || !shouldReportActionObject(sourceCode, actionArgument))
+				if (
+					actionArgument.type !== "ObjectExpression" ||
+					!shouldReportActionObject(sourceCode, actionArgument)
+				) {
 					return;
+				}
 
 				const program = getProgram(actionArgument);
 				if (program === undefined) return;

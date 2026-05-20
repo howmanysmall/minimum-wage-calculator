@@ -9,7 +9,7 @@ inputs:
   mise-version:
     description: mise version to install
     required: false
-    default: latest
+    default: 2026.5.12
 
 runs:
   using: composite
