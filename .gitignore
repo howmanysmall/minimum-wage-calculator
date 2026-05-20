@@ -9,10 +9,10 @@ coverage
 
 .envrc
 
-.agents/skills/github-actions-templates/
-.agents/skills/react-doctor/
 .agents/skills/frontend-design/
+.agents/skills/github-actions-templates/
 .agents/skills/react-context-patterns/
+.agents/skills/react-doctor/
 .agents/skills/react-hooks-patterns/
 .agents/skills/react-performance/
 .agents/skills/tailwind-components/
@@ -20,12 +20,13 @@ coverage
 .agents/skills/tailwind-performance/
 .agents/skills/tailwind-responsive-design/
 .agents/skills/tailwind-utility-classes/
+.agents/skills/update-dependencies/
 .agents/skills/vercel-composition-patterns/
+.agents/skills/vercel-react-best-practices/
 .agents/skills/vercel-react-view-transitions/
 .agents/skills/visx/
 .agents/skills/vitest-configuration/
 .agents/skills/vitest-performance/
 .agents/skills/vitest-testing-patterns/
-.agents/skills/vercel-react-best-practices/
-.agents/skills/web-design-guidelines/
 .agents/skills/vitest/
+.agents/skills/web-design-guidelines/
