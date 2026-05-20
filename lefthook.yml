@@ -1,40 +1,36 @@
-# Lefthook configuration — replaces simple-git-hooks + lint-staged
+# Lefthook configuration
 
 commit-msg:
   commands:
     commitlint:
-      run: bun x --bun commitlint --edit {1}
+      run: nr commitlint --edit {1}
 
 post-merge:
   commands:
     install:
-      run: bun install
+      run: pullhook --install
 
 pre-commit:
   parallel: true
   jobs:
-    # CSS, HTML, JSON — biome check + fix
     - name: biome check css/html/json
       glob: "*.{css,html,json,jsonc,grit,code-workspace}"
-      run: bun run biome check --write --no-errors-on-unmatched {staged_files}
+      run: nr biome check --write --no-errors-on-unmatched {staged_files}
       stage_fixed: true
 
-    # JS/TS — oxc fix, biome check, oxfmt
     - name: lint+format js/ts
       glob: "*.{js,jsx,ts,tsx}"
       run: |
-        bun run oxc --fix {staged_files}
-        bun run biome check --write --no-errors-on-unmatched {staged_files}
-        bun run format {staged_files}
+        nr oxc --fix {staged_files}
+        nr biome check --write --no-errors-on-unmatched {staged_files}
+        nr format {staged_files}
       stage_fixed: true
 
-    # JSON5, MDX — format only
     - name: format json5/mdx
       glob: "*.{json5,mdx}"
-      run: bun run format {staged_files}
+      run: nr format {staged_files}
       stage_fixed: true
 
-    # Markdown — rumdl lint + fmt
     - name: lint markdown
       glob: "*.md"
       run: |
@@ -42,7 +38,6 @@ pre-commit:
         rumdl fmt {staged_files}
       stage_fixed: true
 
-    # TOML — tombi lint + format
     - name: lint toml
       glob: "*.toml"
       run: |

@@ -2,7 +2,11 @@ import { availableParallelism } from "node:os";
 import { argv } from "node:process";
 import { defineConfig } from "vitest/config";
 
-const isFocusedRun = argv.slice(2).some((argument) => argument.endsWith(".test.ts") || argument.startsWith("tests/"));
+const isFocusedRun = argv
+	.slice(2)
+	.some(
+		(argument) => argument.endsWith(".test.ts") || argument.endsWith(".test.tsx") || argument.startsWith("tests/"),
+	);
 
 const cpuCount = availableParallelism();
 const workerCount = Math.max(2, Math.min(cpuCount - 1, 12));
@@ -31,8 +35,6 @@ const configuration = defineConfig({
 				"plugins/oxc/small-rules/types/missing-types.ts",
 			],
 			include: ["plugins/oxc/small-rules/**"],
-			provider: "v8",
-			reporter: ["text", "text-summary"],
 			reportOnFailure: false,
 			thresholds: {
 				branches: 80,

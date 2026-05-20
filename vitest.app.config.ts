@@ -2,7 +2,11 @@ import { availableParallelism } from "node:os";
 import { argv } from "node:process";
 import { defineConfig } from "vitest/config";
 
-const isFocusedRun = argv.slice(2).some((argument) => argument.endsWith(".test.ts") || argument.startsWith("tests/"));
+const isFocusedRun = argv
+	.slice(2)
+	.some(
+		(argument) => argument.endsWith(".test.ts") || argument.endsWith(".test.tsx") || argument.startsWith("tests/"),
+	);
 
 const cpuCount = availableParallelism();
 const workerCount = Math.max(2, Math.min(cpuCount - 1, 12));
@@ -22,9 +26,7 @@ const configuration = defineConfig({
 			cleanOnRerun: false,
 			enabled: !isFocusedRun,
 			exclude: ["src/**/*.d.ts"],
-			include: ["src/**/*.ts"],
-			provider: "v8",
-			reporter: ["text", "text-summary"],
+			include: ["src/**/*.{ts,tsx}"],
 			reportOnFailure: false,
 			thresholds: {
 				branches: 80,
@@ -38,15 +40,15 @@ const configuration = defineConfig({
 			optimizer: { ssr: { enabled: false } },
 		},
 		environment: "node",
-		exclude: ["**/node_modules/**", "**/dist/**"],
+		exclude: ["**/node_modules/**", "**/dist/**", "**/.DS_Store", "tests/small-rules/**"],
 		fileParallelism: true,
 		globals: true,
-		include: ["tests/**/*.test.ts"],
+		include: ["tests/**/*.test.{ts,tsx}"],
 		isolate: false,
 		maxConcurrency: 64,
 		maxWorkers: workerCount,
+		name: "app",
 		pool: "forks",
-		reporters: ["dot"],
 		testTimeout: 30_000,
 		typecheck: {
 			checker: "tsgo",

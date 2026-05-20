@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"biome": "biome",
+		"biome:ci": "biome ci",
 		"build": "nr type-check && vite build",
 		"build:oxc": "jiti ./scripts/build-small-rules.ts",
 		"dev": "vite",
@@ -16,10 +17,9 @@
 		"prepare": "lefthook install",
 		"preview": "vite preview",
 		"publish:pages": "bash scripts/publish-pages.sh",
-		"release": "standard-version",
 		"skills": "skills",
-		"test": "bun test",
-		"test:watch": "bun test --watch",
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"tsgo": "tsgo",
 		"type-check": "tsgo --build",
 		"update-snapshots": "jiti scripts/update-snapshots.ts"
