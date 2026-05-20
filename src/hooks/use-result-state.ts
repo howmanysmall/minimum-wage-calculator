@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { calculateRequiredWage } from "@functions/calculate-require-wage";
+import { calculateRequiredWage } from "@functions/calculate-required-wage";
 import { isZipFormatValid, normalizeZip } from "@utilities/data-lookup-utilities";
 
 import type { MonthlyCosts, WageResult } from "@project-types";

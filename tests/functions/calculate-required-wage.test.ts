@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculateRequiredWage } from "@functions/calculate-require-wage";
+import { calculateRequiredWage } from "@functions/calculate-required-wage";
 
 describe("calculateRequiredWage", () => {
 	it("should calculate the monthly, annual, and hourly requirements", () => {
