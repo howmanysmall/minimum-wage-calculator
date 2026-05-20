@@ -1,16 +1,31 @@
 import React from "react";
-import type { VersionSnapshot } from "../types";
+
 import { CalculatorSections } from "./calculator-sections";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
+
+import type { VersionSnapshot } from "@project-types";
+
 import type {
 	AssumptionsSectionProperties,
 	LocationSectionProperties,
 	MonthlyCostsSectionProperties,
 	ProfileSectionProperties,
 } from "./section-types";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
 
-interface CalculatorFormProperties {
+const MODEL_INPUTS_KICKER = <p className="section-kicker">Model Inputs</p>;
+
+const CALCULATOR_INPUTS_TITLE = (
+	<h2 className="text-foreground text-[1.32rem] font-semibold tracking-tight">Calculator Inputs</h2>
+);
+
+const CALCULATOR_INPUTS_DESCRIPTION = (
+	<p className="text-muted-foreground text-sm leading-relaxed">
+		Set location, assumptions, profile, and monthly costs before calculating required wage.
+	</p>
+);
+
+export interface CalculatorFormProperties {
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
 	readonly dataVersion: VersionSnapshot;
 	readonly locationSectionProperties: LocationSectionProperties;
@@ -34,11 +49,9 @@ export function CalculatorForm({
 	return (
 		<form onSubmit={onFormSubmit}>
 			<Card className="space-y-5 rounded-3xl px-5 py-5 sm:px-6 sm:py-6">
-				<p className="section-kicker">Model Inputs</p>
-				<h2 className="text-foreground text-[1.32rem] font-semibold tracking-tight">Calculator Inputs</h2>
-				<p className="text-muted-foreground text-sm leading-relaxed">
-					Set location, assumptions, profile, and monthly costs before calculating required wage.
-				</p>
+				{MODEL_INPUTS_KICKER}
+				{CALCULATOR_INPUTS_TITLE}
+				{CALCULATOR_INPUTS_DESCRIPTION}
 				<CalculatorSections
 					assumptionsSectionProperties={assumptionsSectionProperties}
 					locationSectionProperties={locationSectionProperties}
@@ -49,11 +62,12 @@ export function CalculatorForm({
 					<p
 						aria-live="polite"
 						className="border-destructive/30 bg-destructive/10 text-destructive rounded-xl border px-3 py-2 text-sm font-medium"
-						role="alert"
-					>
+						role="alert">
 						{resultError}
 					</p>
-				) : undefined}
+				) : (
+					""
+				)}
 				<Button className="h-11 w-full rounded-xl text-sm font-semibold" size="lg" type="submit">
 					Calculate Required Wage
 				</Button>

@@ -1,9 +1,11 @@
 import React from "react";
-import { formatCurrency, roundToTwo } from "../lib/format";
-import type { WageResult } from "../types";
+import { formatCurrency, roundToTwo } from "@utilities/format-utilities";
+
 import { ResultCard } from "./result-card";
 
-interface ResultsGridProperties {
+import type { WageResult } from "@project-types";
+
+export interface ResultsGridProperties {
 	readonly result: WageResult;
 }
 

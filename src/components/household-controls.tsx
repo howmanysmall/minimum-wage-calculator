@@ -1,11 +1,13 @@
 import React from "react";
-import { formatCurrency } from "../lib/format";
-import type { HouseholdProfile } from "../types";
+import { formatCurrency } from "@utilities/format-utilities";
+
 import { FoodPlanSelect } from "./food-plan-select";
 import { NumericInput } from "./numeric-input";
 import { Button } from "./ui/button";
 
-interface HouseholdControlsProperties {
+import type { HouseholdProfile } from "@project-types";
+
+export interface HouseholdControlsProperties {
 	readonly householdFoodRecommendation: number;
 	readonly householdProfile: HouseholdProfile;
 	readonly onAdultsChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -51,8 +53,7 @@ export function HouseholdControls({
 					className="mt-3 h-10 rounded-xl md:mt-0"
 					onClick={onApplyHouseholdFoodRecommendation}
 					type="button"
-					variant="secondary"
-				>
+					variant="secondary">
 					Apply Recommendation
 				</Button>
 			</div>

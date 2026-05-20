@@ -1,7 +1,10 @@
 import React from "react";
-import type { VersionSnapshot, WageResult } from "../types";
+
 import { CalculatorForm } from "./calculator-form";
 import { ResultsPanel } from "./results-panel";
+
+import type { VersionSnapshot, WageResult } from "@project-types";
+
 import type {
 	AssumptionsSectionProperties,
 	LocationSectionProperties,
@@ -9,7 +12,7 @@ import type {
 	ProfileSectionProperties,
 } from "./section-types";
 
-interface CalculatorLayoutProperties {
+export interface CalculatorLayoutProperties {
 	readonly annualWorkHours: number;
 	readonly assumptionsSectionProperties: AssumptionsSectionProperties;
 	readonly dataVersion: VersionSnapshot;
@@ -39,8 +42,7 @@ export function CalculatorLayout({
 	return (
 		<main
 			className="grid gap-5 lg:grid-cols-[minmax(0,1.45fr)_minmax(320px,0.95fr)] lg:items-start"
-			id="calculator-main"
-		>
+			id="calculator-main">
 			<div className="rise-in min-w-0 [animation-delay:110ms]">
 				<CalculatorForm
 					assumptionsSectionProperties={assumptionsSectionProperties}

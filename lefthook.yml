@@ -1,0 +1,65 @@
+min_version: 2.0.0
+
+colors: true
+
+output:
+  - execution
+  - summary
+
+commit-msg:
+  commands:
+    commitlint:
+      run: nr commitlint --edit {1}
+
+post-merge:
+  commands:
+    install:
+      run: pullhook --install
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome check css/html/json
+      glob: "*.{css,html,json,jsonc,grit,code-workspace}"
+      run: nr biome check --write --no-errors-on-unmatched {staged_files}
+      stage_fixed: true
+
+    - name: lint+format js/ts
+      glob: "*.{js,jsx,ts,tsx}"
+      run: |
+        nr oxc -- --no-error-on-unmatched-pattern --fix {staged_files}
+        nr format {staged_files}
+      stage_fixed: true
+
+    - name: format yaml
+      glob: "*.{yaml,yml}"
+      run: nr format {staged_files}
+      stage_fixed: true
+
+    - name: format json5/mdx
+      glob: "*.{json5,mdx}"
+      run: nr format {staged_files}
+      stage_fixed: true
+
+    - name: lint markdown
+      glob: "*.md"
+      run: |
+        rumdl check --fix {staged_files}
+        rumdl fmt {staged_files}
+      stage_fixed: true
+
+    - name: lint toml
+      glob: "*.toml"
+      run: |
+        tombi lint {staged_files}
+        tombi format {staged_files}
+      stage_fixed: true
+
+pre-push:
+  commands:
+    ci-checks:
+      run: |
+        nr biome ci
+        nr oxc .
+        nr test
+        nr build

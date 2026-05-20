@@ -1,5 +1,5 @@
+import type { HouseholdProfile, MonthlyCosts, TabId } from "@project-types";
 import type { ChangeEventHandler, FocusEventHandler, MouseEventHandler } from "react";
-import type { HouseholdProfile, MonthlyCosts, TabId } from "../types";
 
 export interface LocationSectionProperties {
 	readonly locationName: string;

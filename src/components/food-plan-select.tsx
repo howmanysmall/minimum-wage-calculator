@@ -1,11 +1,18 @@
 import React from "react";
-import type { HouseholdProfile } from "../types";
+
 import { Label } from "./ui/label";
 
-interface FoodPlanSelectProperties {
+import type { HouseholdProfile } from "@project-types";
+
+export interface FoodPlanSelectProperties {
 	readonly onChange: React.ChangeEventHandler<HTMLSelectElement>;
 	readonly value: HouseholdProfile["foodPlanTier"];
 }
+
+const THRIFTY_OPTION = <option value="thrifty">Thrifty</option>;
+const LOW_OPTION = <option value="low">Low</option>;
+const MODERATE_OPTION = <option value="moderate">Moderate</option>;
+const LIBERAL_OPTION = <option value="liberal">Liberal</option>;
 
 export function FoodPlanSelect({ onChange, value }: FoodPlanSelectProperties): React.ReactNode {
 	return (
@@ -18,12 +25,11 @@ export function FoodPlanSelect({ onChange, value }: FoodPlanSelectProperties): R
 				id="food-tier"
 				name="foodTier"
 				onChange={onChange}
-				value={value}
-			>
-				<option value="thrifty">Thrifty</option>
-				<option value="low">Low</option>
-				<option value="moderate">Moderate</option>
-				<option value="liberal">Liberal</option>
+				value={value}>
+				{THRIFTY_OPTION}
+				{LOW_OPTION}
+				{MODERATE_OPTION}
+				{LIBERAL_OPTION}
 			</select>
 		</div>
 	);

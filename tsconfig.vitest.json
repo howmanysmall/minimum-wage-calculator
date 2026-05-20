@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"noEmit": true,
+		"noUncheckedIndexedAccess": true,
+		"paths": {
+			"@build-plugins/*": ["./scripts/plugins/*"],
+			"@build-polyfills/*": ["./scripts/polyfills/*"],
+			"@build-utilities/*": ["./scripts/build-utilities/*"],
+			"@components/*": ["./src/components/*"],
+			"@constants/*": ["./src/constants/*"],
+			"@data/*": ["./src/data/*"],
+			"@functions/*": ["./src/functions/*"],
+			"@hooks/*": ["./src/hooks/*"],
+			"@oxlint-rules/*": ["./plugins/oxc/small-rules/rules/*"],
+			"@oxlint-types/*": ["./plugins/oxc/small-rules/types/*"],
+			"@oxlint-utilities/*": ["./plugins/oxc/small-rules/utilities/*"],
+			"@project-types": ["./src/types.ts"],
+			"@small-rules": ["./plugins/oxc/small-rules/index.ts"],
+			"@utilities/*": ["./src/utilities/*"],
+		},
+		"rootDir": ".",
+		"types": ["node", "vitest/globals"],
+	},
+	"exclude": ["**/node_modules/**", "**/dist/**"],
+	"extends": "./tsconfig.base.json",
+	"include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx", "vitest.config.ts"],
+}

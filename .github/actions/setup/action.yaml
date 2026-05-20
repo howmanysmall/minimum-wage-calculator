@@ -1,0 +1,41 @@
+name: Setup Build Environment
+description: Setup mise, Aube, and dependency caches
+
+inputs:
+  cache-version:
+    description: Cache namespace version
+    required: false
+    default: v1
+  mise-version:
+    description: mise version to install
+    required: false
+    default: 2026.5.12
+
+runs:
+  using: composite
+  steps:
+    - name: Setup mise
+      uses: jdx/mise-action@v4
+      with:
+        cache: false
+        install: true
+        install_args: node aube lefthook
+        version: ${{ inputs.mise-version }}
+
+    - name: Restore Aube cache
+      id: aube-cache
+      uses: actions/cache/restore@v4
+      with:
+        path: ~/.cache/aube
+        key: ${{ inputs.cache-version }}-${{ runner.os }}-${{ runner.arch }}-aube-${{ hashFiles('aube-lock.yaml', 'aube-workspace.yaml', 'mise.toml', 'package.json') }}
+
+    - name: Install dependencies
+      shell: bash
+      run: aube ci
+
+    - name: Save Aube cache
+      if: steps.aube-cache.outputs.cache-hit != 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+      uses: actions/cache/save@v4
+      with:
+        path: ~/.cache/aube
+        key: ${{ steps.aube-cache.outputs.cache-primary-key }}

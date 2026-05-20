@@ -1,10 +1,11 @@
-import type { ReactNode } from "react";
 import React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@utilities/component-utilities";
+
+import type { ReactNode } from "react";
 
 type BadgeVariant = "default" | "secondary" | "outline";
 
-interface BadgeProperties {
+export interface BadgeProperties {
 	readonly children: ReactNode;
 	readonly className?: string;
 	readonly variant?: BadgeVariant;
@@ -23,8 +24,7 @@ export function Badge({ children, className, variant = "default" }: BadgePropert
 				"inline-flex w-fit items-center rounded-full border border-transparent px-2.5 py-0.5 text-xs font-semibold",
 				getVariantClassName(variant),
 				className,
-			)}
-		>
+			)}>
 			{children}
 		</span>
 	);

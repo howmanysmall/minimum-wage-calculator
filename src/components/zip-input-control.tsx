@@ -1,8 +1,9 @@
 import React from "react";
+
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-interface ZipInputControlProperties {
+export interface ZipInputControlProperties {
 	readonly onZipBlur: React.FocusEventHandler<HTMLInputElement>;
 	readonly onZipChange: React.ChangeEventHandler<HTMLInputElement>;
 	readonly zip: string;

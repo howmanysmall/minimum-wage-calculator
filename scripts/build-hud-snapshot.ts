@@ -1,9 +1,12 @@
-#!/usr/bin/env bun
+#!/usr/bin/env jiti
 
-import { Command } from "@jsr/cliffy__command";
-import { write } from "bun";
-import type { Cell, Worksheet } from "exceljs";
+import { resolve } from "node:path";
+import { argv } from "node:process";
+import { Command } from "@cliffy/command";
+import { write } from "@scripts-polyfills/bun-write";
 import { Workbook } from "exceljs";
+
+import type { Cell, Worksheet } from "exceljs";
 
 interface HudRecord {
 	readonly hudAreaCode: string;
@@ -21,7 +24,7 @@ interface HudSnapshot {
 	readonly sourceYear: number;
 }
 
-const ZIP_PATTERN = /^\d{5}$/;
+const ZIP_PATTERN = /^\d{5}$/u;
 
 function getCellText(cell: Cell): string {
 	const cellValue = cell.value;
@@ -36,9 +39,7 @@ function getCellText(cell: Cell): string {
 
 function parseTwoBedroom(rawValue: string): number | undefined {
 	const parsedValue = Number.parseFloat(rawValue);
-	if (!Number.isFinite(parsedValue)) return undefined;
-
-	return Math.round(parsedValue);
+	return Number.isFinite(parsedValue) ? Math.round(parsedValue) : undefined;
 }
 
 function parseHudRecords(sheet: Worksheet, sourceYear: number): Array<HudRecord> {
@@ -69,7 +70,11 @@ async function parseHudSafmrAsync(inputXlsxPath: string, sourceYear: number, sou
 	await workbook.xlsx.readFile(inputXlsxPath);
 
 	const [sheet] = workbook.worksheets;
-	if (sheet === undefined) throw new Error("No sheets found in HUD workbook.");
+	if (sheet === undefined) {
+		const error = new Error("No sheets found in HUD workbook.");
+		Error.captureStackTrace(error, parseHudSafmrAsync);
+		throw error;
+	}
 
 	const records = parseHudRecords(sheet, sourceYear);
 	return {
@@ -93,9 +98,9 @@ export async function buildHudSnapshotAsync(
 }
 
 if (import.meta.main) {
-	await new Command()
+	const command = new Command()
 		.name("build-hud-snapshot")
-		.version("1.0.0")
+		.version("2.0.0")
 		.description("Build ZIP -> 2BR rent snapshot from HUD SAFMR workbook.")
 		.option("--input <path:string>", "Path to fyXXXX_safmrs.xlsx", { required: true })
 		.option("--output <path:string>", "Output JSON path", { required: true })
@@ -103,6 +108,8 @@ if (import.meta.main) {
 		.option("--source-url <url:string>", "HUD source URL", { required: true })
 		.action(async ({ input, output, sourceUrl, year }) => {
 			await buildHudSnapshotAsync(input, output, year, sourceUrl);
-		})
-		.parse(Bun.argv.slice(2));
+		});
+
+	const scriptIndex = argv.findIndex((argument) => resolve(argument) === import.meta.filename);
+	await command.parse(argv.slice(scriptIndex + 1));
 }

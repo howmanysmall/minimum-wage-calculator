@@ -1,8 +1,9 @@
 import React from "react";
+
 import { Button } from "./ui/button";
 import { ZipInputControl } from "./zip-input-control";
 
-interface LocationZipRowProperties {
+export interface LocationZipRowProperties {
 	readonly onZipBlur: React.FocusEventHandler<HTMLInputElement>;
 	readonly onZipChange: React.ChangeEventHandler<HTMLInputElement>;
 	readonly onZipLookupClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -22,8 +23,7 @@ export function LocationZipRow({
 				className="h-11 rounded-xl px-4 md:min-w-32"
 				onClick={onZipLookupClick}
 				type="button"
-				variant="outline"
-			>
+				variant="outline">
 				Use ZIP Rent
 			</Button>
 		</div>

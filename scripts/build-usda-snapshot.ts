@@ -1,7 +1,10 @@
-#!/usr/bin/env bun
+#!/usr/bin/env jiti
 
-import { Command } from "@jsr/cliffy__command";
-import { write } from "bun";
+import { resolve } from "node:path";
+import { argv } from "node:process";
+import { Command } from "@cliffy/command";
+import { write } from "@scripts-polyfills/bun-write";
+
 import type { FoodSnapshot } from "../src/types";
 
 type TierName = "low" | "moderate" | "liberal";
@@ -22,33 +25,37 @@ interface ThreeLevelValues {
 	readonly child: TierValues;
 }
 
-const MONTH_YEAR_PATTERN = /Cost of Food at Home at Three Levels:\s*U\.S\. Average,\s*([A-Za-z]+)\s+(\d{4})/i;
-const TABLE_PATTERN = /<table[^>]*>.*?<\/table>/is;
-const ROW_PATTERN = /<tr[^>]*>(.*?)<\/tr>/gis;
-const CELL_PATTERN = /<t[dh][^>]*>(.*?)<\/t[dh]>/gis;
-const TAG_PATTERN = /<[^>]+>/g;
-const REGEX_ESCAPE_PATTERN = /[.*+?^${}()|[\]\\]/g;
-const CURRENCY_CLEAN_PATTERN = /[^0-9.-]/g;
-const DECIMAL_HTML_ENTITY_PATTERN = /&#(\d+);/g;
-const NAMED_HTML_ENTITY_PATTERN = /&[a-z]+;/gi;
-const WHITESPACE_PATTERN = /\s+/g;
+const MONTH_YEAR_PATTERN = /Cost of Food at Home at Three Levels:\s*U\.S\. Average,\s*([A-Z]+)\s+(\d{4})/iu;
+const TABLE_PATTERN = /<table[^>]*>.*?<\/table>/isu;
+const ROW_PATTERN = /<tr[^>]*>(.*?)<\/tr>/gisu;
+const CELL_PATTERN = /<t[dh][^>]*>(.*?)<\/t[dh]>/gisu;
+// oxlint-disable-next-line sonar/slow-regex
+const TAG_PATTERN = /<[^>]+>/gu;
+const REGEX_ESCAPE_PATTERN = /[.*+?^${}()|[\]\\]/gu;
+const CURRENCY_CLEAN_PATTERN = /[^0-9.-]/gu;
+const DECIMAL_HTML_ENTITY_PATTERN = /&#(\d+);/gu;
+const NAMED_HTML_ENTITY_PATTERN = /&[a-z]+;/giu;
+const WHITESPACE_PATTERN = /\s+/gu;
 
-const HTML_ENTITY_MAP = {
+const ENTRIES = Object.entries({
 	"&#39;": "'",
 	"&amp;": "&",
 	"&gt;": ">",
 	"&lt;": "<",
 	"&nbsp;": " ",
 	"&quot;": '"',
-} as const;
-const ENTRIES = Object.entries(HTML_ENTITY_MAP);
+} as const);
 
 const THRIFTY_HEADING_PREFIX = String.raw`Thrifty Food Plan:\s*`;
 const THREE_LEVEL_HEADING_PREFIX = String.raw`Cost of Food at Home at Three Levels:\s*U\.S\. Average,\s*`;
 
 async function fetchTextAsync(url: string): Promise<string> {
 	const response = await fetch(url, { signal: AbortSignal.timeout(30_000) });
-	if (!response.ok) throw new Error(`HTTP ${response.status} while fetching ${url}`);
+	if (!response.ok) {
+		const error = new Error(`HTTP ${response.status} while fetching ${url}`);
+		Error.captureStackTrace(error, fetchTextAsync);
+		throw error;
+	}
 	return response.text();
 }
 
@@ -73,7 +80,11 @@ function cleanHtmlText(raw: string): string {
 
 function parseCurrency(value: string): number {
 	const cleaned = value.replaceAll(",", "").replaceAll(CURRENCY_CLEAN_PATTERN, "");
-	if (!cleaned) throw new Error(`Unable to parse currency value: ${JSON.stringify(value)}`);
+	if (!cleaned) {
+		const error = new Error(`Unable to parse currency value: ${JSON.stringify(value)}`);
+		Error.captureStackTrace(error, parseCurrency);
+		throw error;
+	}
 	return Number.parseFloat(cleaned);
 }
 
@@ -83,11 +94,19 @@ function escapeRegex(value: string): string {
 
 function extractTableAfterHeading(pageHtml: string, headingPattern: RegExp): string {
 	const headingMatch = headingPattern.exec(pageHtml);
-	if (!headingMatch) throw new Error(`Heading not found for pattern: ${headingPattern.source}`);
+	if (!headingMatch) {
+		const error = new Error(`Heading not found for pattern: ${headingPattern.source}`);
+		Error.captureStackTrace(error, extractTableAfterHeading);
+		throw error;
+	}
 
 	const segment = pageHtml.slice(headingMatch.index + headingMatch[0].length);
 	const tableMatch = TABLE_PATTERN.exec(segment);
-	if (!tableMatch) throw new Error(`Table not found after heading pattern: ${headingPattern.source}`);
+	if (!tableMatch) {
+		const error = new Error(`Table not found after heading pattern: ${headingPattern.source}`);
+		Error.captureStackTrace(error, extractTableAfterHeading);
+		throw error;
+	}
 
 	return tableMatch[0];
 }
@@ -111,6 +130,26 @@ function tableRows(tableHtml: string): Array<Array<string>> {
 	return rows;
 }
 
+function isSectionLabel(label: string): label is "female" | "male" | "child" {
+	return label === "female" || label === "male" || label === "child";
+}
+
+function tryParseThriftyAdultValue(label: string, section: string, cells: ReadonlyArray<string>): number | undefined {
+	if (label !== "20-50 years") return undefined;
+	const rawValue = cells.at(2);
+	if (typeof rawValue !== "string") return undefined;
+	const parsed = parseCurrency(rawValue);
+	if (section === "female" || section === "male") return parsed;
+	return undefined;
+}
+
+function tryParseThriftyChildValue(label: string, section: string, cells: ReadonlyArray<string>): number | undefined {
+	if (label !== "9-11 years" || section !== "child") return undefined;
+	const rawValue = cells.at(2);
+	if (typeof rawValue !== "string") return undefined;
+	return parseCurrency(rawValue);
+}
+
 function parseThriftyRows(rows: ReadonlyArray<ReadonlyArray<string>>): ThriftyValues {
 	let section = "";
 	let femaleAdult: number | undefined;
@@ -118,29 +157,25 @@ function parseThriftyRows(rows: ReadonlyArray<ReadonlyArray<string>>): ThriftyVa
 	let childValue: number | undefined;
 	for (const cells of rows) {
 		const label = cells[0]?.toLowerCase() ?? "";
-		if (label === "female" || label === "male" || label === "child") {
+		if (isSectionLabel(label)) {
 			section = label;
 			continue;
 		}
 
 		if (cells.length < 3) continue;
-		if (label === "20-50 years") {
-			const monthlyRawValue = cells.at(2);
-			if (typeof monthlyRawValue !== "string") continue;
-			const parsedValue = parseCurrency(monthlyRawValue);
-			if (section === "female") femaleAdult = parsedValue;
-			if (section === "male") maleAdult = parsedValue;
-		}
 
-		if (label === "9-11 years" && section === "child") {
-			const childRawValue = cells.at(2);
-			if (typeof childRawValue !== "string") continue;
-			childValue = parseCurrency(childRawValue);
-		}
+		const adultValue = tryParseThriftyAdultValue(label, section, cells);
+		if (adultValue !== undefined && section === "female") femaleAdult = adultValue;
+		if (adultValue !== undefined && section === "male") maleAdult = adultValue;
+
+		const parsedChild = tryParseThriftyChildValue(label, section, cells);
+		if (parsedChild !== undefined) childValue = parsedChild;
 	}
 
 	if (femaleAdult === undefined || maleAdult === undefined || childValue === undefined) {
-		throw new Error("Missing required Thrifty table values for 20-50 years and/or 9-11 years.");
+		const error = new Error("Missing required Thrifty table values for 20-50 years and/or 9-11 years.");
+		Error.captureStackTrace(error, parseThriftyRows);
+		throw error;
 	}
 
 	return { adult: Math.round((femaleAdult + maleAdult) / 2), child: Math.round(childValue) };
@@ -165,31 +200,47 @@ function parseThreeLevelRowValues(cells: ReadonlyArray<string>): TierValues | un
 	};
 }
 
+function processThreeLevelRow(
+	cells: ReadonlyArray<string>,
+	section: string,
+):
+	| { type: "section"; value: string }
+	| { type: "femaleAdult"; value: TierValues }
+	| { type: "maleAdult"; value: TierValues }
+	| { type: "child"; value: TierValues }
+	| { type: "skip" } {
+	const label = cells[0]?.toLowerCase() ?? "";
+	if (isSectionLabel(label)) return { type: "section", value: label };
+	if (cells.length < 7) return { type: "skip" };
+
+	const rowValues = parseThreeLevelRowValues(cells);
+	if (rowValues === undefined) return { type: "skip" };
+	if (label === "20-50 years" && section === "female") return { type: "femaleAdult", value: rowValues };
+	if (label === "20-50 years" && section === "male") return { type: "maleAdult", value: rowValues };
+	if (label === "9-11 years" && section === "child") return { type: "child", value: rowValues };
+	return { type: "skip" };
+}
+
 function parseThreeLevelRows(rows: ReadonlyArray<ReadonlyArray<string>>): ThreeLevelValues {
 	let section = "";
 	let femaleAdult: TierValues | undefined;
 	let maleAdult: TierValues | undefined;
 	let childValues: TierValues | undefined;
 	for (const cells of rows) {
-		const label = cells[0]?.toLowerCase() ?? "";
-		if (label === "female" || label === "male" || label === "child") {
-			section = label;
-			continue;
-		}
-
-		if (cells.length < 7) continue;
-		const rowValues = parseThreeLevelRowValues(cells);
-		if (rowValues === undefined) continue;
-		if (label === "20-50 years" && section === "female") femaleAdult = rowValues;
-		if (label === "20-50 years" && section === "male") maleAdult = rowValues;
-		if (label === "9-11 years" && section === "child") childValues = rowValues;
+		const result = processThreeLevelRow(cells, section);
+		if (result.type === "section") section = result.value;
+		if (result.type === "femaleAdult") femaleAdult = result.value;
+		if (result.type === "maleAdult") maleAdult = result.value;
+		if (result.type === "child") childValues = result.value;
 	}
 
 	if (femaleAdult === undefined || maleAdult === undefined || childValues === undefined) {
-		throw new Error("Missing required three-level values for 20-50 years and/or 9-11 years.");
+		const error = new Error("Missing required three-level values for 20-50 years and/or 9-11 years.");
+		Error.captureStackTrace(error, parseThreeLevelRows);
+		throw error;
 	}
 
-	const adult = new Array<TierName>("low", "moderate", "liberal");
+	const adult = ["low", "moderate", "liberal"] as const;
 	const adultResult: Record<TierName, number> = { liberal: 0, low: 0, moderate: 0 };
 	for (const tier of adult) adultResult[tier] = Math.round((femaleAdult[tier] + maleAdult[tier]) / 2);
 
@@ -200,17 +251,23 @@ function parseThreeLevelRows(rows: ReadonlyArray<ReadonlyArray<string>>): ThreeL
 }
 
 function createHeadingPattern(prefix: string, month: string, year: number): RegExp {
-	return new RegExp(`${prefix}${escapeRegex(month)}\\s+${year}`, "i");
+	return new RegExp(`${prefix}${escapeRegex(month)}\\s+${year}`, "iu");
 }
 
 async function parseUsdaFoodSnapshotAsync(sourceUrl: string): Promise<FoodSnapshot> {
 	const pageHtml = await fetchTextAsync(sourceUrl);
 	const monthYearMatch = MONTH_YEAR_PATTERN.exec(pageHtml);
-	if (!monthYearMatch) throw new Error("Unable to find latest month/year label on USDA page.");
+	if (!monthYearMatch) {
+		const error = new Error("Unable to find latest month/year label on USDA page.");
+		Error.captureStackTrace(error, parseUsdaFoodSnapshotAsync);
+		throw error;
+	}
 
 	const [, sourceMonthRaw, sourceYearRaw] = monthYearMatch;
 	if (typeof sourceMonthRaw !== "string" || typeof sourceYearRaw !== "string") {
-		throw new TypeError("Unable to parse month/year values from USDA heading.");
+		const error = new TypeError("Unable to parse month/year values from USDA heading.");
+		Error.captureStackTrace(error, parseUsdaFoodSnapshotAsync);
+		throw error;
 	}
 
 	const sourceMonth = sourceMonthRaw;
@@ -257,14 +314,16 @@ export async function buildUsdaSnapshotAsync(output: string, sourceUrl: string):
 }
 
 if (import.meta.main) {
-	await new Command()
+	const command = new Command()
 		.name("build-usda-snapshot")
-		.version("1.0.0")
+		.version("2.0.0")
 		.description("Build USDA food snapshot JSON from the USDA monthly report page.")
 		.option("--output <path:string>", "Output JSON path", { required: true })
 		.option("--source-url <url:string>", "USDA monthly report page URL", { required: true })
 		.action(async ({ output, sourceUrl }) => {
 			await buildUsdaSnapshotAsync(output, sourceUrl);
-		})
-		.parse(Bun.argv.slice(2));
+		});
+
+	const scriptIndex = argv.findIndex((argument) => resolve(argument) === import.meta.filename);
+	await command.parse(argv.slice(scriptIndex + 1));
 }

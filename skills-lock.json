@@ -1,30 +1,119 @@
 {
   "version": 1,
   "skills": {
-    "github-actions-templates": {
-      "source": "wshobson/agents",
+    "frontend-design": {
+      "source": "anthropics/skills",
       "sourceType": "github",
-      "computedHash": "7a28cb13b9fa427ae39c943ceb25d81f8135f848e1a1d434dc86a75926f51035"
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
+    },
+    "react-context-patterns": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/frameworks/react/skills/react-context-patterns/SKILL.md",
+      "computedHash": "2948e7bec565be396aa45e40780cc3f92b75a67d8f02b8bdbb5b4a643d0cb539"
     },
     "react-doctor": {
       "source": "millionco/react-doctor",
       "sourceType": "github",
-      "computedHash": "efa8db174b3c60e27b34d76842e3a9a7c0e5e602fd4d66eec897372d0ce3f30b"
+      "skillPath": "skills/react-doctor/SKILL.md",
+      "computedHash": "26b327a7146dfd129f51b409ed5a22f0801b735da25001b5c42b718ecc0822ac"
+    },
+    "react-hooks-patterns": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/frameworks/react/skills/react-hooks-patterns/SKILL.md",
+      "computedHash": "c4428f53e34eb27782a0eb8450810e39cc955cb7830bd57d64649c22e9dea6ee"
+    },
+    "react-performance": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/frameworks/react/skills/react-performance/SKILL.md",
+      "computedHash": "f481de90d2e03aad2f67dc7455f4de7e2f65180e943f33f2e24d916f3acb48c7"
+    },
+    "tailwind-components": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/tailwind/skills/tailwind-components/SKILL.md",
+      "computedHash": "b1cd83d7e406958d066887d76edb32bc6c9b4f5f29dfb3e548358d5af89adc61"
+    },
+    "tailwind-configuration": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/tailwind/skills/tailwind-configuration/SKILL.md",
+      "computedHash": "70cd83097c19b5f9d0d732557995b95f2ccf7dc64892b1ae541d34e8e9e11671"
+    },
+    "tailwind-performance": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/tailwind/skills/tailwind-performance/SKILL.md",
+      "computedHash": "95968ff46a922926b2040f8ac1226c4c72325e3b662d20d689ea04398ef443c1"
+    },
+    "tailwind-responsive-design": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/tailwind/skills/tailwind-responsive-design/SKILL.md",
+      "computedHash": "be0e7e40bdd242626c000a68ee022a7820202e9c03e764bf7ed92ea94f41e14e"
+    },
+    "tailwind-utility-classes": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/tailwind/skills/tailwind-utility-classes/SKILL.md",
+      "computedHash": "2b68709709a1477a6194e0768a2bddabd8b92180840168d340935760f7005d86"
     },
     "vercel-composition-patterns": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
-      "computedHash": "f98931159fa9c7fed043bcd18a891a46dcf89ababa38df13a4c5b7b30dc0ce07"
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "computedHash": "575757e3e25761c8c562d6e395d29f0b76c98b1273c0bd72d88e6ab1bc9c7d42"
     },
     "vercel-react-best-practices": {
       "source": "ddaakk/agent-skills",
       "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
       "computedHash": "5af404189f21fecdeca2d5881eaecf2596e17bd35ede9e3f1360ba21d1e61e10"
     },
-    "web-design-guidelines": {
-      "source": "ddaakk/agent-skills",
+    "vercel-react-view-transitions": {
+      "source": "vercel-labs/agent-skills",
       "sourceType": "github",
-      "computedHash": "b9e85077d55864274b19e19b16e87ecef72cb1685ac5578fa4f3ae89deb45fd4"
+      "skillPath": "skills/react-view-transitions/SKILL.md",
+      "computedHash": "c8952fc9127fa0564d0cb71dccb4215a5608ac933b5831104f09173a97a46f85"
+    },
+    "visx": {
+      "source": "cerico/macfair",
+      "sourceType": "github",
+      "skillPath": "files/claude/skills/visx/SKILL.md",
+      "computedHash": "44111c69c70a7cfdd71eb0ba631568a252cd16823c70000d1000fa081a7a2e6c"
+    },
+    "vitest": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vitest/SKILL.md",
+      "computedHash": "669c7275f7e1379b06b2bcfa593603aead4c983b951c7e8edbc09640aa38d0a1"
+    },
+    "vitest-configuration": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/vitest/skills/vitest-configuration/SKILL.md",
+      "computedHash": "40dc892b1458c87e17e81800e70b315d75d9b278cba2bf5ca0b86bbbdd906ab5"
+    },
+    "vitest-performance": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/vitest/skills/vitest-performance/SKILL.md",
+      "computedHash": "63d10f78dfe23722f448793991fe23e0bf8b3a3aadf9b03afcfb2cea82470874"
+    },
+    "vitest-testing-patterns": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "skillPath": "plugins/tools/vitest/skills/vitest-testing-patterns/SKILL.md",
+      "computedHash": "03bd80ed80c390357506e95ad3afa9c0fd4a83c031ecb3231f075b7795bf0014"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
     }
   }
 }

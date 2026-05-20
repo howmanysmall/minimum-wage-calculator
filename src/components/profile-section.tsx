@@ -1,7 +1,15 @@
 import React from "react";
+
 import { HouseholdControls } from "./household-controls";
 import { ProfileTabs } from "./profile-tabs";
+
 import type { ProfileSectionProperties } from "./section-types";
+
+const PROFILE_KICKER = <p className="section-kicker">Household Setup</p>;
+const PROFILE_TITLE = <h2 className="text-foreground mb-3 text-xl font-semibold tracking-tight">Profile</h2>;
+const SINGLE_ADULT_FOOD_NOTE = (
+	<p className="text-muted-foreground mt-3 text-sm">Single Adult mode uses USDA baseline food assumptions.</p>
+);
 
 export function ProfileSection({
 	activeTab,
@@ -16,18 +24,14 @@ export function ProfileSection({
 }: ProfileSectionProperties): React.ReactNode {
 	return (
 		<section className="section-shell">
-			<p className="section-kicker">Household Setup</p>
-			<h2 className="text-foreground mb-3 text-xl font-semibold tracking-tight">Profile</h2>
+			{PROFILE_KICKER}
+			{PROFILE_TITLE}
 			<ProfileTabs
 				activeTab={activeTab}
 				onHouseholdTabClick={onHouseholdTabClick}
 				onSingleTabClick={onSingleTabClick}
 			/>
-			{activeTab === "single" ? (
-				<p className="text-muted-foreground mt-3 text-sm">
-					Single Adult mode uses USDA baseline food assumptions.
-				</p>
-			) : undefined}
+			{activeTab === "single" ? SINGLE_ADULT_FOOD_NOTE : ""}
 			{activeTab === "household" && (
 				<div className="mt-3">
 					<HouseholdControls

@@ -1,11 +1,22 @@
 {
 	"compilerOptions": {
-		"composite": true,
-		"lib": ["ESNext", "DOM", "DOM.Iterable"],
-		"tsBuildInfoFile": "./.tsbuildinfo.scripts",
-		"types": ["bun"],
+		"noEmit": true,
+		"paths": {
+			"@components/*": ["./src/components/*"],
+			"@constants/*": ["./src/constants/*"],
+			"@data/*": ["./src/data/*"],
+			"@functions/*": ["./src/functions/*"],
+			"@hooks/*": ["./src/hooks/*"],
+			"@project-types": ["./src/types.ts"],
+			"@scripts-polyfills/*": ["./scripts/polyfills/*"],
+			"@scripts-utilities/*": ["./scripts/utilities/*"],
+			"@scripts-validators/*": ["./scripts/validators/*"],
+			"@utilities/*": ["./src/utilities/*"],
+		},
+		"rootDir": ".",
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.scripts.tsbuildinfo",
+		"types": ["node"],
 	},
 	"extends": "./tsconfig.base.json",
 	"include": ["scripts/**/*.ts", "src/**/*.ts"],
-	"references": [{ "path": "./tsconfig.app.json" }],
 }
