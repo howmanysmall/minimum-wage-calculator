@@ -7,7 +7,7 @@ Mobile-first website that computes a required minimum hourly wage based on the f
 
 Where:
 
-- `H_r`: fair market rent (ZIP autofill from HUD SAFMR 2BR snapshot)
+- `H_r`: fair market rent (ZIP auto fill from HUD SAFMR 2BR snapshot)
 - `F_p`: monthly food
 - `T_t`: monthly transportation
 - `I_p`: monthly internet + phone
@@ -20,35 +20,35 @@ Where:
 ## Stack
 
 - Vite + React + TypeScript
-- Bun test runner (`bun test`)
+- Vitest
 - Static deployment ready for GitHub Pages
 
-## Run locally
+## Run Locally
 
 ```bash
-bun install
-bun run dev
+ni
+nr dev
 ```
 
 ## Test
 
 ```bash
-bun run test
+nr test
 ```
 
 ## Lint
 
 ```bash
-bun run lint
+nr lint
 ```
 
 ## Build
 
 ```bash
-bun run build
+nr build
 ```
 
-## Data snapshots
+## Data Snapshots
 
 - Rent: HUD SAFMR FY 2026 workbook (2BR extracted to ZIP-keyed JSON)
 - Food: USDA latest monthly report page (adult/child monthly values extracted from official tables)
@@ -73,18 +73,18 @@ GitHub Actions workflow is included at `.github/workflows/deploy.yml` for GitHub
 - To deploy immediately from CLI, run:
 
 ```bash
-bun run publish:pages
+nr publish:pages
 ```
 
 - To publish a different branch/ref:
 
 ```bash
-bun run publish:pages -- my-branch
+nr publish:pages -- my-branch
 ```
 
 - One-time repo setting: in GitHub `Settings -> Pages`, set Source to `GitHub Actions`.
 
-## Source links
+## Source Links
 
 - HUD FMR/SAFMR: <https://www.huduser.gov/portal/datasets/fmr.html>
 - HUD FY 2026 SAFMR workbook: <https://www.huduser.gov/portal/datasets/fmr/fmr2026/fy2026_safmrs.xlsx>

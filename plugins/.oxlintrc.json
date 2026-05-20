@@ -426,6 +426,7 @@
 			"off",
 			{
 				"allow": [
+					// left alone as reference
 					{ "from": "package", "name": "BuildArtifact", "package": "bun" },
 					{ "from": "package", "name": "ResolveMessage", "package": "bun" },
 					{ "from": "file", "name": "BunBuildMessage" }

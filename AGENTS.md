@@ -7,7 +7,7 @@ This file provides guidance to agents when working with code in this repository.
 ```bash
 aube run dev          # Dev server
 aube run build        # Type-check + Vite build
-aube run test         # Run all tests (Bun test runner)
+aube run test         # Run all tests (Vitest)
 aube run test:watch   # Watch mode
 aube run lint         # Oxlint + Biome lint
 aube run oxc          # Oxlint with type-aware analysis

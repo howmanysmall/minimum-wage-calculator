@@ -407,9 +407,7 @@
 
 		{
 			"includes": ["benchmarks/**/*.{ts,js}"],
-			"javascript": {
-				"globals": ["Bun"]
-			},
+			"javascript": {},
 			"linter": {
 				"rules": {
 					"nursery": {

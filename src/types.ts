@@ -1,16 +1,15 @@
 import { regex, type } from "arktype";
 
-export const isFoodPlanTier = type('"thrifty" | "low" | "moderate" | "liberal"');
+const isFoodPlanTier = type('"thrifty" | "low" | "moderate" | "liberal"');
 export type FoodPlanTier = typeof isFoodPlanTier.infer;
 
-export const isTabId = type('"single" | "household"');
+const isTabId = type('"single" | "household"');
 export type TabId = typeof isTabId.infer;
 
 // oxlint-disable-next-line unicorn/prefer-string-raw
-export const isZipCode = regex("^\\d{5}$", "u");
-export type ZipCode = typeof isZipCode.infer;
+const isZipCode = regex("^\\d{5}$", "u");
 
-export const isMonthlyCosts = type({
+const isMonthlyCosts = type({
 	foodMonthly: "number",
 	healthMonthly: "number",
 	internetPhoneMonthly: "number",
@@ -20,7 +19,7 @@ export const isMonthlyCosts = type({
 }).readonly();
 export type MonthlyCosts = typeof isMonthlyCosts.infer;
 
-export const isWageInput = isMonthlyCosts
+const isWageInput = isMonthlyCosts
 	.and({
 		annualWorkHours: "number",
 		retirementRate: "number",
@@ -29,7 +28,7 @@ export const isWageInput = isMonthlyCosts
 	.readonly();
 export type WageInput = typeof isWageInput.infer;
 
-export const isWageResult = type({
+const isWageResult = type({
 	annualGrossRequired: "number",
 	hourlyRequired: "number",
 	monthlyBudget: "number",
@@ -37,14 +36,14 @@ export const isWageResult = type({
 }).readonly();
 export type WageResult = typeof isWageResult.infer;
 
-export const isHouseholdProfile = type({
+const isHouseholdProfile = type({
 	adults: "number % 1",
 	children: "number % 1",
 	foodPlanTier: isFoodPlanTier,
 }).readonly();
 export type HouseholdProfile = typeof isHouseholdProfile.infer;
 
-export const isZipRentRecord = type({
+const isZipRentRecord = type({
 	hudAreaCode: "string",
 	hudAreaName: "string",
 	sourceYear: "number % 1",
@@ -60,17 +59,15 @@ export const isRentSnapshot = type({
 	sourceUrl: "string",
 	sourceYear: "number % 1",
 }).readonly();
-export type RentSnapshot = typeof isRentSnapshot.infer;
 
-export const isFoodTierValues = type({
+const isFoodTierValues = type({
 	liberal: "number",
 	low: "number",
 	moderate: "number",
 	thrifty: "number",
 }).readonly();
-export type FoodTierValues = typeof isFoodTierValues.infer;
 
-export const isFoodSnapshot = type({
+const isFoodSnapshot = type({
 	adultPerPerson: isFoodTierValues,
 	childPerPerson: isFoodTierValues,
 	notes: "string",
@@ -81,7 +78,7 @@ export const isFoodSnapshot = type({
 });
 export type FoodSnapshot = typeof isFoodSnapshot.infer;
 
-export const isVersionSnapshot = type({
+const isVersionSnapshot = type({
 	appBuiltAt: "string",
 	foodAsOf: "string",
 	rentAsOf: "string",
