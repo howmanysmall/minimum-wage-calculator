@@ -39,9 +39,7 @@ function getCellText(cell: Cell): string {
 
 function parseTwoBedroom(rawValue: string): number | undefined {
 	const parsedValue = Number.parseFloat(rawValue);
-	if (!Number.isFinite(parsedValue)) return undefined;
-
-	return Math.round(parsedValue);
+	return Number.isFinite(parsedValue) ? Math.round(parsedValue) : undefined;
 }
 
 function parseHudRecords(sheet: Worksheet, sourceYear: number): Array<HudRecord> {
@@ -72,7 +70,11 @@ async function parseHudSafmrAsync(inputXlsxPath: string, sourceYear: number, sou
 	await workbook.xlsx.readFile(inputXlsxPath);
 
 	const [sheet] = workbook.worksheets;
-	if (sheet === undefined) throw new Error("No sheets found in HUD workbook.");
+	if (sheet === undefined) {
+		const error = new Error("No sheets found in HUD workbook.");
+		Error.captureStackTrace(error, parseHudSafmrAsync);
+		throw error;
+	}
 
 	const records = parseHudRecords(sheet, sourceYear);
 	return {

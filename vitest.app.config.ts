@@ -49,6 +49,7 @@ const configuration = defineConfig({
 		maxWorkers: workerCount,
 		name: "app",
 		pool: "forks",
+		setupFiles: ["./tests/setup/setup-dom.ts"],
 		testTimeout: 30_000,
 		typecheck: {
 			checker: "tsgo",
