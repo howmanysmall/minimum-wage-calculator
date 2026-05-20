@@ -9,6 +9,11 @@ export interface FoodPlanSelectProperties {
 	readonly value: HouseholdProfile["foodPlanTier"];
 }
 
+const THRIFTY_OPTION = <option value="thrifty">Thrifty</option>;
+const LOW_OPTION = <option value="low">Low</option>;
+const MODERATE_OPTION = <option value="moderate">Moderate</option>;
+const LIBERAL_OPTION = <option value="liberal">Liberal</option>;
+
 export function FoodPlanSelect({ onChange, value }: FoodPlanSelectProperties): React.ReactNode {
 	return (
 		<div className="space-y-2">
@@ -21,10 +26,10 @@ export function FoodPlanSelect({ onChange, value }: FoodPlanSelectProperties): R
 				name="foodTier"
 				onChange={onChange}
 				value={value}>
-				<option value="thrifty">Thrifty</option>
-				<option value="low">Low</option>
-				<option value="moderate">Moderate</option>
-				<option value="liberal">Liberal</option>
+				{THRIFTY_OPTION}
+				{LOW_OPTION}
+				{MODERATE_OPTION}
+				{LIBERAL_OPTION}
 			</select>
 		</div>
 	);

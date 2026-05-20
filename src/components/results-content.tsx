@@ -15,6 +15,14 @@ export interface ResultsContentProperties {
 	readonly savingsRatePercent: number;
 }
 
+const RESULTS_KICKER = <p className="section-kicker">Output</p>;
+const RESULTS_TITLE = <h2 className="text-foreground text-2xl tracking-tight">Results</h2>;
+const RESULTS_DESCRIPTION = (
+	<p className="text-muted-foreground text-sm leading-relaxed">
+		Calculated from your current assumptions and monthly costs.
+	</p>
+);
+
 function buildBudgetLine(result: WageResult): string {
 	return `B_r = H_r + F_p + T_t + I_p + U_p + M_p = ${formatCurrency(roundToTwo(result.monthlyBudget))}`;
 }
@@ -47,14 +55,12 @@ export function ResultsContent({
 				<p aria-live="polite" className="sr-only">
 					{buildLiveSummary(result)}
 				</p>
-				<p className="section-kicker">Output</p>
-				<h2 className="text-foreground text-2xl tracking-tight">Results</h2>
+				{RESULTS_KICKER}
+				{RESULTS_TITLE}
 				<Badge className="border-border/70 bg-secondary/86 rounded-full px-3 py-1 text-xs" variant="secondary">
 					Model Ready
 				</Badge>
-				<p className="text-muted-foreground text-sm leading-relaxed">
-					Calculated from your current assumptions and monthly costs.
-				</p>
+				{RESULTS_DESCRIPTION}
 				<ResultsGrid result={result} />
 				<FormulaDetails
 					budgetLine={buildBudgetLine(result)}

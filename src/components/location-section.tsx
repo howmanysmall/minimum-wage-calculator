@@ -5,6 +5,9 @@ import { LocationZipRow } from "./location-zip-row";
 
 import type { LocationSectionProperties } from "./section-types";
 
+const LOCATION_KICKER = <p className="section-kicker">Region</p>;
+const LOCATION_TITLE = <h2 className="text-foreground mb-3 text-xl font-semibold tracking-tight">Location</h2>;
+
 export function LocationSection({
 	locationName,
 	onZipBlur,
@@ -15,8 +18,8 @@ export function LocationSection({
 }: LocationSectionProperties): React.ReactNode {
 	return (
 		<section className="section-shell">
-			<p className="section-kicker">Region</p>
-			<h2 className="text-foreground mb-3 text-xl font-semibold tracking-tight">Location</h2>
+			{LOCATION_KICKER}
+			{LOCATION_TITLE}
 			<LocationZipRow
 				onZipBlur={onZipBlur}
 				onZipChange={onZipChange}

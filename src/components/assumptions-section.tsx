@@ -1,6 +1,13 @@
 import React from "react";
+
 import { NumericInput } from "./numeric-input";
+
 import type { AssumptionsSectionProperties } from "./section-types";
+
+const ASSUMPTIONS_KICKER = <p className="section-kicker">Parameters</p>;
+const ASSUMPTIONS_TITLE = (
+	<h2 className="text-foreground mb-3 text-xl font-semibold tracking-tight">Core Assumptions</h2>
+);
 
 export function AssumptionsSection({
 	annualWorkHours,
@@ -12,8 +19,8 @@ export function AssumptionsSection({
 }: AssumptionsSectionProperties): React.ReactNode {
 	return (
 		<section className="section-shell">
-			<p className="section-kicker">Parameters</p>
-			<h2 className="text-foreground mb-3 text-xl font-semibold tracking-tight">Core Assumptions</h2>
+			{ASSUMPTIONS_KICKER}
+			{ASSUMPTIONS_TITLE}
 			<div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
 				<NumericInput
 					inputId="savings-rate"
