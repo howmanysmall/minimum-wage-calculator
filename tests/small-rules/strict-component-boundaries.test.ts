@@ -11,7 +11,6 @@ const errors = [
 	{
 		message:
 			"Do not reach into an individual component's folder for nested modules. Import from the closest shared components folder instead.",
-		type: "ImportDeclaration",
 	},
 ];
 

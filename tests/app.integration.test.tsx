@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DEFAULT_ANNUAL_WORK_HOURS } from "@constants/calculator-constants";
-import { calculateRequiredWage } from "@functions/calculate-require-wage";
+import { calculateRequiredWage } from "@functions/calculate-required-wage";
 import {
 	getFoodBaselineForSingleAdult,
 	getHouseholdFoodBaseline,

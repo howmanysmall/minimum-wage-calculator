@@ -3,10 +3,9 @@ import rule from "@oxlint-rules/prefer-singular-enums";
 
 import { ts } from "./rule-testers";
 
-function errorWithName(name: string): { message: string; type: string } {
+function errorWithName(name: string): { message: string } {
 	return {
 		message: `Enum name "${name}" should be singular.`,
-		type: "Identifier",
 	};
 }
 
