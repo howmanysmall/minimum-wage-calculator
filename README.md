@@ -42,11 +42,19 @@ nr test
 nr lint
 ```
 
+To run Oxlint by itself:
+
+```bash
+nr oxc .
+```
+
 ## Build
 
 ```bash
 nr build
 ```
+
+`ni` and `nr` come from `@antfu/ni`. In this repo they resolve to the same install and script commands you would otherwise run through `aube`.
 
 ## Data Snapshots
 
@@ -67,7 +75,7 @@ This refresh script updates both:
 
 ## Deployment
 
-GitHub Actions workflow is included at `.github/workflows/deploy.yml` for GitHub Pages.
+GitHub Pages deploys through GitHub Actions. The main workflow lives at `.github/workflows/deploy.yml`, and the shared setup steps live under `.github/actions/`.
 
 - Pushes to `main` deploy automatically.
 - To deploy immediately from CLI, run:
@@ -82,6 +90,7 @@ nr publish:pages
 nr publish:pages -- my-branch
 ```
 
+- CI validation runs from `.github/workflows/ci.yml`.
 - One-time repo setting: in GitHub `Settings -> Pages`, set Source to `GitHub Actions`.
 
 ## Source Links

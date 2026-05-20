@@ -25,7 +25,7 @@ Your React-related skills are the most important to activate when you are workin
 
 ### Calculation Engine
 
-The core is a pure function `calculateRequiredWage(input: WageInput): WageResult` in `src/lib/calc.ts`. It computes:
+The core is a pure function `calculateRequiredWage(input: WageInput): WageResult` in `src/functions/calculate-required-wage.ts`. It computes:
 
 ```text
 monthlyBudget = sum of all costs
@@ -40,7 +40,7 @@ Static JSON snapshots imported at compile time:
 - `src/data/zip_rent_safmr_2026.json` — HUD SAFMR 2BR rent by ZIP (6.7 MB)
 - `src/data/food_usda_2026_01.json` — USDA food costs by household/tier
 
-`src/lib/data-lookup.ts` provides the facade: `lookupZipRent(zip)`, `getHouseholdFoodBaseline(profile)`, `normalizeZip(value)`. Snapshots are refreshed via Python scripts in `scripts/`.
+`src/utilities/data-lookup-utilities.ts` provides the facade: `lookupZipRent(zip)`, `getHouseholdFoodBaseline(profile)`, `normalizeZip(value)`. Snapshots are refreshed via Python scripts in `scripts/`.
 
 ### State Management
 
@@ -69,8 +69,6 @@ Five custom hooks in `src/hooks/` own distinct domains — `useAssumptionsState`
 - No `null` (prefer `undefined`)
 - Kebab-case filenames
 - Max 120 chars/line, 120 lines/function, 7 parameters
-
-**Custom Oxlint rule:** `require-named-effect-functions` (in `plugins/oxc/`) — React effect hooks (`useEffect`, `useLayoutEffect`, `useInsertionEffect`) must use named function declarations, not inline arrow functions.
 
 **Commits:** Conventional Commits format enforced by commitlint.
 
