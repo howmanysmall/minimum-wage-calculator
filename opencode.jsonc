@@ -355,7 +355,7 @@
 			"type": "local",
 		},
 		"shadcn": {
-			"command": ["aubx", "shadcn@latest", "mcp"],
+			"command": ["aube", "run", "shadcn", "mcp"],
 			"enabled": true,
 			"type": "local",
 		},
