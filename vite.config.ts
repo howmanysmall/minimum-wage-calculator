@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 const configuration = defineConfig({
 	base: "./",
 	plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss()],
+	resolve: { tsconfigPaths: true },
 });
 
 export default configuration;
